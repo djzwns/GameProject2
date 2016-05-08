@@ -27,9 +27,11 @@ public class UnitEntity : ScriptableObject {
 
     public float AttackSpeed
     {
-        get
-        {
-            return attackSpeed;
-        }
+        get { return attackSpeed; }
+    }
+
+    public float JumpPower
+    {
+        get { return jumpPower; }
     }
 }

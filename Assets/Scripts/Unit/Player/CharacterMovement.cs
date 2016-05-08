@@ -8,11 +8,11 @@ public class CharacterMovement : MonoBehaviour {
     // 수평 키 입력 시 사용
     private float moving = 0f;
 
-    // 점프 상태 체크
-    private bool isJumping = false;
-
     // 캐릭터 이동 속도
     public float speed = 4.0f;
+
+    // 캐릭터 점프력
+    private float jumpPower;
 
     // 스프라이트 렌더러
     private SpriteRenderer spriteRenderer;
@@ -25,6 +25,7 @@ public class CharacterMovement : MonoBehaviour {
         rigid2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         speed = Player.Instance.speed;
+        jumpPower = Player.Instance.JumpPower;
 	}
 	
 	// Update is called once per frame
@@ -42,8 +43,8 @@ public class CharacterMovement : MonoBehaviour {
         }
         else if (GameMode == GAMEMODE.Gamemode.STORY)
         {
-            if( EndFalling() )
-                rigid2D.velocity = (Vector2.right * speed * 0.1f) + rigid2D.velocity;
+            if (EndFalling())
+                rigid2D.velocity = new Vector2( speed, rigid2D.velocity.y);// (Vector2.right * speed * 0.1f) + rigid2D.velocity;
         }
 	}
 
@@ -62,10 +63,9 @@ public class CharacterMovement : MonoBehaviour {
     // 두번 터치 했을 때 점프를 하게됨
     public void Jump()
     {
-        if (Input.GetAxis("Vertical") > 0 && !isJumping)
+        if (Input.GetAxis("Vertical") > 0 && EndFalling())
         {
-            isJumping = true;
-            rigid2D.velocity = new Vector2(rigid2D.velocity.x, speed);
+            rigid2D.velocity = new Vector2(rigid2D.velocity.x, jumpPower);
         }
         //if (Input.GetTouch(0).tapCount > 1 && Input.GetTouch(0).phase == TouchPhase.Ended && !isJumping)
         //{
@@ -80,7 +80,6 @@ public class CharacterMovement : MonoBehaviour {
         // y축 속도가 0이면 착지 상태 이므로 점프 종료
         if (rigid2D.velocity.y == 0)
         {
-            isJumping = false;
             return true;
         }
         return false;

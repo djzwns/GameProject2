@@ -5,6 +5,8 @@ public class EnemyMovement : MonoBehaviour {
     // 리지드바디 사용
     private Rigidbody2D rigid2D;
 
+    public float speed = 2.0f;
+
     void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
@@ -14,6 +16,6 @@ public class EnemyMovement : MonoBehaviour {
     void Update () {
 
         if (rigid2D.velocity.y == 0)
-            rigid2D.velocity = -(Vector2.right * 2.0f * 0.1f) + rigid2D.velocity;
+            rigid2D.velocity = new Vector2(-speed, rigid2D.velocity.y);
     }
 }
