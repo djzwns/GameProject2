@@ -18,7 +18,8 @@ public class CharacterMovement : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
 
     // 게임 모드에 따라 움직임이 달라짐.
-    public GAMEMODE.Gamemode GameMode = GAMEMODE.Gamemode.STORY;
+    [SerializeField]
+    private GAMEMODE GameMode;
 
 	// Use this for initialization
 	void Awake () {
@@ -26,11 +27,12 @@ public class CharacterMovement : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         speed = Player.Instance.speed;
         jumpPower = Player.Instance.JumpPower;
+        GameMode = GAMEMODE.Instance;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameMode == GAMEMODE.Gamemode.ARCADE)
+        if (GameMode.gamemode == GAMEMODE.Gamemode.ARCADE)
         {
             Move();
             Jump();
@@ -41,7 +43,7 @@ public class CharacterMovement : MonoBehaviour {
             if (moving != 0)
                 spriteRenderer.flipX = moving < 0;
         }
-        else if (GameMode == GAMEMODE.Gamemode.STORY)
+        else if (GameMode.gamemode == GAMEMODE.Gamemode.STORY)
         {
             if (EndFalling())
                 rigid2D.velocity = new Vector2( speed, rigid2D.velocity.y);// (Vector2.right * speed * 0.1f) + rigid2D.velocity;
