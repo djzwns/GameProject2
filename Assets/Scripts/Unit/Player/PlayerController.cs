@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField]
     private UnitEntity player;
     private UnitEntity enemy;
     private float attackTime;
