@@ -3,6 +3,7 @@ using System.Collections;
 
 [System.Serializable]   // 인스펙터 창에서 보이도록 사용
 public class UnitEntity : ScriptableObject {
+    public string unitName;
     public int defence = 0;            // 방어력
     public int strength = 500;         // 공격력
     public int power = 100;            // 힘
@@ -15,7 +16,7 @@ public class UnitEntity : ScriptableObject {
 
     void Awake()
     {
-        currentHealthPoint = healthPoint;
+        LoadData();
     }
 
     // 데미지를 0부터 최대 값까지.
@@ -32,6 +33,7 @@ public class UnitEntity : ScriptableObject {
         unit.TakeDamage(strength);
     }
 
+    // 죽었는지 체크함, 죽으면 true 반환
     public bool IsDead()
     {
         if (currentHealthPoint <= 0)
@@ -40,6 +42,28 @@ public class UnitEntity : ScriptableObject {
         return false;
     }
 
+    // 속성들 저장
+    public virtual void SaveData()
+    {
+        PlayerPrefs.SetInt(unitName + "Defence", defence);
+        PlayerPrefs.SetInt(unitName + "Strength", strength);
+        PlayerPrefs.SetInt(unitName + "Power", power);
+        PlayerPrefs.SetFloat(unitName + "HelthPoint", healthPoint);
+        PlayerPrefs.SetFloat(unitName + "Speed", speed);
+    }
+
+    // 속성들 불러오기
+    public virtual void LoadData()
+    {
+        defence = PlayerPrefs.GetInt(unitName + "Defence", defence);
+        strength = PlayerPrefs.GetInt(unitName + "Strength", strength);
+        power = PlayerPrefs.GetInt(unitName + "Power", power);
+        healthPoint = PlayerPrefs.GetFloat(unitName + "HelthPoint", healthPoint);
+        speed = PlayerPrefs.GetFloat(unitName + "Speed", speed);
+        currentHealthPoint = healthPoint;
+    }
+
+    // 프로퍼티 get
     public float AttackSpeed
     {
         get { return attackSpeed; }

@@ -29,15 +29,8 @@ public class EnemyController : MonoBehaviour {
         {
             if (attackTime >= enemy.AttackSpeed)
             {
-                if (player.Evasion <= Random.Range(1, 100))
-                {
-                    attackTime = 0;
-                    enemy.Attack(player);
-                }
-                else
-                {
-                    Debug.Log("플레이어 회피");
-                }
+                attackTime = 0;
+                enemy.Attack(player);
             }
         }
     }
