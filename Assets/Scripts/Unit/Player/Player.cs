@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Player : UnitEntity {
     private static Player instance;
-    public int accuracy = 80;    // 명중률
-    public int evasion = 20;     // 회피율
+    private int accuracy = 80;    // 명중률
+    private int evasion = 20;     // 회피율
 
     // 인스턴스 받아옴
     public static Player Instance
@@ -13,7 +13,7 @@ public class Player : UnitEntity {
         {
             if (instance == null)
             {
-                instance = new Player();
+                instance = ScriptableObject.CreateInstance<Player>() as Player;
                 instance.LoadData();
             }
 
@@ -27,7 +27,7 @@ public class Player : UnitEntity {
         PlayerPrefs.SetInt("Defence", defence);
         PlayerPrefs.SetInt("Strength", strength);
         PlayerPrefs.SetInt("Power", power);
-        PlayerPrefs.SetFloat("HelthPoint", helthPoint);
+        PlayerPrefs.SetFloat("HelthPoint", healthPoint);
         PlayerPrefs.SetFloat("Speed", speed);
         PlayerPrefs.SetInt("Accuracy", accuracy);
         PlayerPrefs.SetInt("Evasion", evasion);
@@ -39,18 +39,18 @@ public class Player : UnitEntity {
         defence = PlayerPrefs.GetInt("Defence", defence);
         strength = PlayerPrefs.GetInt("Strength", strength);
         power = PlayerPrefs.GetInt("Power", power);
-        helthPoint = PlayerPrefs.GetFloat("HelthPoint", helthPoint);
+        healthPoint = PlayerPrefs.GetFloat("HelthPoint", healthPoint);
         speed = PlayerPrefs.GetFloat("Speed", speed);
         accuracy = PlayerPrefs.GetInt("Accuracy", accuracy);
         evasion = PlayerPrefs.GetInt("Evasion", evasion);
-        currentHelthPoint = helthPoint;
+        currentHealthPoint = healthPoint;
         jumpPower = jumpPower + (speed * 0.01f);
     }
 
     public override void TakeDamage(int amount)
     {
         // 명중률에 따라 데미지를 주거나 못주거나.
-        if (accuracy >= Random.Range(1, 100))
+        if (accuracy <= Random.Range(1, 100))
             base.TakeDamage(amount);
         else
         {
@@ -58,4 +58,11 @@ public class Player : UnitEntity {
             base.TakeDamage(0);
         }
     }
+
+    public override void Attack(UnitEntity unit)
+    {
+        base.Attack(unit);
+    }
+
+    public int Evasion { get { return evasion; } }
 }
