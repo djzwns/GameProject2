@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : UnitController
 {
-    [SerializeField]
-    private UnitEntity player;
-    private UnitEntity enemy;
-    private float attackTime;
 
 	// Use this for initialization
 	void Awake () {
         player = Player.Instance;
-        attackTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -37,6 +32,14 @@ public class PlayerController : MonoBehaviour
 
         if (enemy != null)
         {
+            // 힘이 적보다 더 세면 밀처냄
+            if (player.power > enemy.power)
+            {
+                KnockBack(coll);
+            }
+
+            // 다음 공격까지 약간의 텀을 만듬
+            // 한번에 여러번 때리는 것 방지
             if (attackTime >= player.AttackSpeed)
             {
                 attackTime = 0;

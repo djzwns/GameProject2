@@ -1,14 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : MonoBehaviour {
-    // 적 정보를 담고 있음 private 이지만 인스펙터창에 노출
-    [SerializeField]
-    private Enemy enemy;
-    // 플레이어 정보를 받아옴
-    private Player player;
-    // 공격 가능한 시간
-    private float attackTime = 0f;
+public class EnemyController : UnitController {
 
 	// Use this for initialization
 	void Awake () {
@@ -27,6 +20,14 @@ public class EnemyController : MonoBehaviour {
     {
         if (coll.gameObject.tag.Equals("Player"))
         {
+            // 힘이 플레이어보다 세면 밀처냄
+            if (enemy.power > player.power)
+            {
+                KnockBack(coll);
+            }
+
+            // 다음 공격까지 약간의 텀을 만듬
+            // 한번에 여러번 때리는 것 방지
             if (attackTime >= enemy.AttackSpeed)
             {
                 attackTime = 0;
