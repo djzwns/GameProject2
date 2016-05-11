@@ -12,7 +12,7 @@ public class UnitEntity : ScriptableObject {
     [SerializeField]
     protected float currentHealthPoint;// 현재 체력
     protected float jumpPower = 3f;    // 점프력
-    protected float attackSpeed = 2f;
+    protected float attackSpeed = 0.5f;
 
     void Awake()
     {
