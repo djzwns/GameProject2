@@ -47,4 +47,11 @@ public class PlayerController : UnitController
             }
         }
     }
+
+
+    // 게임이 실행 중이면 오브젝트 활성화
+    void IsPlayGame()
+    {
+        gameObject.SetActive(true);
+    }
 }
