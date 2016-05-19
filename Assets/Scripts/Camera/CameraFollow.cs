@@ -10,13 +10,18 @@ public class CameraFollow : MonoBehaviour {
 
     // 배경 사이즈
     public float bgWidth;
+
+    // 매니저 인스턴스
+    private StageManager stageManager;
     
 	void Start ()
     {
         player = GameObject.Find("player").transform;
+        stageManager = StageManager.Instance;
 
         StageCreate background = GameObject.Find("BackGround").GetComponent<StageCreate>();
-        bgWidth = (background.bgCount-1) * background.fLocalSpriteSizeX;
+        // 스테이지에 따라 배경길이가 달라지므로
+        bgWidth = (stageManager.stage[stageManager.currentStage].bgCount-1) * background.fLocalSpriteSizeX;
 
     }
 	

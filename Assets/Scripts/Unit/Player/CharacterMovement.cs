@@ -32,7 +32,7 @@ public class CharacterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameMode.gamemode == GAMEMODE.Gamemode.ARCADE)
+        if (GAMEMODE.Instance.gamemode == GAMEMODE.Gamemode.ARCADE)
         {
             Move();
             Jump();

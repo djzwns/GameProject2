@@ -1,24 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StageManager : MonoBehaviour
 {
-    // 현재 스테이지
-    public int currentStage = 1;
 
-    // 배경화면 갯수
-    public int bgCount = 1;
+    // 스테이지 정보
+    public int currentStage = 0;        // 유저가 선택한 스테이지
+    public List<StageInfo> stage;
 
-    // 적 수
-    public int enemyCount = 1;
+    // 매니저 인스턴스
+    private static StageManager instance;
+    public static StageManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                //StageXml.StageSave(new StageInfo(), Application.dataPath + "/StreamingAssets/Stage.xml");
+                instance = (StageManager)GameObject.FindObjectOfType(typeof(StageManager));
+                instance.stage = StageXml.StageLoad(Application.dataPath + "/StreamingAssets/Stage.xml");
+            }
+            return instance;
+        }
+    }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Awake()
+    {
+        GAMEMODE.Instance.gamemode = stage[currentStage].gameMode;
+    }
 }
