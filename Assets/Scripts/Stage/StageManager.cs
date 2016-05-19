@@ -11,6 +11,9 @@ public class StageManager : MonoBehaviour
     private List<StageInfo> Stage;
     public List<StageInfo> stage { get { return Stage; } }
 
+    // 몬스터 매니저
+    public EnemySpawn enemyManager;
+
     // 매니저 인스턴스
     private static StageManager instance;
     public static StageManager Instance
@@ -30,5 +33,6 @@ public class StageManager : MonoBehaviour
     void Awake()
     {
         GAMEMODE.Instance.gamemode = stage[currentStage].gameMode;
+        enemyManager.StartSpawn();
     }
 }

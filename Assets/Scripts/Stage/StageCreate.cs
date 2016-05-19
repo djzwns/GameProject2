@@ -10,10 +10,6 @@ public class StageCreate : MonoBehaviour
     private Sprite sprite;
     public float fLocalSpriteSizeX;
 
-    // 적 관련
-    public GameObject pfEnemy;      // 적 프리팹
-    public GameObject enemySpawn;   // 적 생성 위치
-
     // 스테이지 매니저
     private StageManager stageManager;
     

@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour {
         player = GameObject.Find("player").transform;
         stageManager = StageManager.Instance;
 
-        StageCreate background = GameObject.Find("BackGround").GetComponent<StageCreate>();
+        StageCreate background = GameObject.Find("StageManager").GetComponent<StageCreate>();
         // 스테이지에 따라 배경길이가 달라지므로
         bgWidth = (stageManager.stage[stageManager.currentStage].bgCount-1) * background.fLocalSpriteSizeX;
 
