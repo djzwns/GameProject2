@@ -26,8 +26,9 @@ public class StageCreate : MonoBehaviour
         // 부모 오브젝트 찾기
         RootBackgroundObject = GameObject.Find("BackGround");
 
+        int BGCount = stageManager.stage[stageManager.currentStage].bgCount;
         // 배경 수 만큼 프리팹 생성
-        for (int i = 0; i < stageManager.stage[stageManager.currentStage].bgCount; ++i)
+        for (int i = 0; i < BGCount; ++i)
         {
             GameObject temp = Instantiate(pfBackground, new Vector3( i * fLocalSpriteSizeX, 0f, 0.1f), Quaternion.identity) as GameObject;
             background = temp.GetComponent<SpriteRenderer>();
@@ -37,7 +38,9 @@ public class StageCreate : MonoBehaviour
             // 생성된 프리팹 부모 오브젝트 밑으로
             temp.transform.parent = RootBackgroundObject.transform;
         }
-
+        BoxCollider2D box2D = GameObject.Find("FloorBoxCollider").GetComponent<BoxCollider2D>();
+        box2D.offset = new Vector2(fLocalSpriteSizeX, box2D.offset.y);
+        box2D.size = new Vector2(BGCount * fLocalSpriteSizeX, box2D.size.y);   
         //pfEnemy = new GameObject[enemyCount];
-	}
+    }
 }
