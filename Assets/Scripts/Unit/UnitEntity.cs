@@ -23,8 +23,14 @@ public class UnitEntity : ScriptableObject {
     // 데미지를 0부터 최대 값까지.
     public virtual void TakeDamage(int amount)
     {
-        // 방어력에 의해 데미지를 감소시켜 깎음. 방어력 1당 1% 데미지 감소
-        currentHealthPoint -= Mathf.Clamp(amount - ( amount * defence * 0.01f ), 0, int.MaxValue );
+        // 회피율에 따라 데미지를 주거나 못주거나.
+        if (evasion >= Random.Range(1, 100))
+        {
+            //Debug.Log("회피");
+            //base.TakeDamage(0);
+        }
+        else // 방어력에 의해 데미지를 감소시켜 깎음. 방어력 1당 1% 데미지 감소
+            currentHealthPoint -= Mathf.Clamp(amount - ( amount * defence * 0.01f ), 0, int.MaxValue );
         //Debug.Log("현재 체력 : " + currentHelthPoint);
     }
 

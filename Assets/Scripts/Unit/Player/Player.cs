@@ -45,18 +45,6 @@ public class Player : UnitEntity {
         jumpPower = jumpPower + (speed * 0.01f);
     }
 
-    public override void TakeDamage(int amount)
-    {
-        // 회피율에 따라 플레이어에게 데미지를 주거나 못주거나.
-        if (evasion >= Random.Range(1, 100))
-        {
-            //Debug.Log("회피");
-            //base.TakeDamage(0);
-        }
-        else
-            base.TakeDamage(amount);
-    }
-
     public override void Attack(UnitEntity unit)
     {
         // 명중률에 따라 몬스터를 때리거나 못 때리거나
