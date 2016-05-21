@@ -4,7 +4,6 @@ using System.Collections;
 public class Player : UnitEntity {
     private static Player instance;
     private int accuracy = 80;    // 명중률
-    private int evasion = 20;     // 회피율
 
     // 인스턴스 받아옴
     public static Player Instance
@@ -24,6 +23,7 @@ public class Player : UnitEntity {
     void Awake()
     {
         unitName = "player";
+        evasion = 20;
     }
 
     // 함수 재정의 -----------------------------------------------------
