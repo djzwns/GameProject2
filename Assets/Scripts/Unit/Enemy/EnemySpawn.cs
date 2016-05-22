@@ -18,7 +18,14 @@ public class EnemySpawn : MonoBehaviour {
 
     // 소환 될 몬스터 수 
     private int enemyCount;
-    // 소환 된 수
+    private int basicEnemy = 0;
+    private int attackEnemy = 0;
+    private int defenceEnemy = 0;
+
+    // 소환 몬스터 생성 순서
+    private EnemyType[] arrApear;
+
+    // 현재 소환 된 수
     private int currentEnemy = 0;
 
     // 스테이지 정보
@@ -36,6 +43,9 @@ public class EnemySpawn : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         enemyCount = stage.attackEnemyCount + stage.basicEnemyCount + stage.defenceEnemyCount;
+        arrApear = new EnemyType[enemyCount];
+        CreateEnemyList();
+        EnemyListSuffle();
 
         // 스폰 코루틴 실행
         StartCoroutine("Spawn");
@@ -57,12 +67,67 @@ public class EnemySpawn : MonoBehaviour {
         {
             yield return new WaitForSeconds(spawnTime);
             GameObject temp = Instantiate(pfEnemy[stage.stageNumber % 10], spawn.transform.position, Quaternion.identity) as GameObject;
+            SpriteRenderer tempSprite = temp.GetComponent<SpriteRenderer>();
+
+            EnemyType type = arrApear[currentEnemy];
+            if (EnemyType.BASIC == type)
+            {
+                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName);
+            }
+            else if (EnemyType.ATTACK == type)
+            {
+                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "_att");
+            }
+            else if (EnemyType.DEFENCE == type)
+            {
+                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "_def");
+            }
 
             // 생성된 오브젝트를 spawn 하위 오브젝트로 넣어줌
             temp.transform.parent = spawn.transform;
             ++currentEnemy;
         }
         isSpawn = false;
+    }
+
+    // 출현 몬스터 리스트 
+    void CreateEnemyList()
+    {
+        while( currentEnemy < enemyCount )
+        {
+            if (basicEnemy < stage.basicEnemyCount)
+            {
+                arrApear[currentEnemy] = EnemyType.BASIC;
+                ++basicEnemy;
+            }
+
+            else if (attackEnemy < stage.attackEnemyCount)
+            {
+                arrApear[currentEnemy] = EnemyType.ATTACK;
+                ++attackEnemy;
+            }
+            else if (defenceEnemy < stage.defenceEnemyCount)
+            {
+                arrApear[currentEnemy] = EnemyType.DEFENCE;
+                ++defenceEnemy;
+            }
+            ++currentEnemy;
+        }
+        currentEnemy = 0;
+    }
+
+    // 리스트 섞기
+    void EnemyListSuffle()
+    {
+        while (currentEnemy < enemyCount)
+        {
+            int i = Random.Range(currentEnemy, enemyCount - 1);
+            EnemyType temp = arrApear[currentEnemy];
+            arrApear[currentEnemy] = arrApear[i];
+            arrApear[i] = temp;
+            ++currentEnemy;
+        }
+        currentEnemy = 0;
     }
 
     /// 스크립트 활성화 될 때 실행
@@ -82,6 +147,9 @@ public class EnemySpawn : MonoBehaviour {
     void OnDisable()
     {
         currentEnemy = 0;
+        basicEnemy = 0;
+        attackEnemy = 0;
+        defenceEnemy = 0;
         Destroy(spawn);
     }
 
