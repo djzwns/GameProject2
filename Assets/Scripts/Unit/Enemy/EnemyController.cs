@@ -20,11 +20,6 @@ public class EnemyController : UnitController {
     {
         if (coll.gameObject.tag.Equals("Player"))
         {
-            // 힘이 플레이어보다 세면 밀처냄
-            if (enemy.power > player.power)
-            {
-                KnockBack(coll);
-            }
 
             // 다음 공격까지 약간의 텀을 만듬
             // 한번에 여러번 때리는 것 방지
@@ -32,6 +27,11 @@ public class EnemyController : UnitController {
             {
                 attackTime = 0;
                 enemy.Attack(player);
+                // 힘이 플레이어보다 세면 밀처냄
+                if (enemy.power > player.power)
+                {
+                    KnockBack(coll);
+                }
             }
         }
     }

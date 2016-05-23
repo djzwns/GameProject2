@@ -12,7 +12,7 @@ public class UnitController : MonoBehaviour {
     
 
     // 공격 가능한 시간
-    protected float attackTime = 0f;
+    protected float attackTime = 0.4f;
 
     public float knockbackPower = 4f;
 
