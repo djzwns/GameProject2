@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 
+
+
 public class Enemy : UnitEntity
 {
-    void Awake()
-    {
-        unitName = "alligator";
-        LoadData();
-    }
+    // 몬스터 종류
+    public EnemySpawn.EnemyType type;
+    
     // 함수 재정의 -----------------------------
     public override void SaveData()
     {
-        base.SaveData();
+        EnemyXml.EnemySave(this, Application.dataPath + "/StreamingAssets/EnemyList.xml");
     }
     public override void LoadData()
     {
-        base.LoadData();
+        EnemyXml.EnemyLoad(this, Application.dataPath + "/StreamingAssets/EnemyList.xml", unitName);
+        currentHealthPoint = healthPoint;
     }
 
     public override void Attack(UnitEntity unit)
@@ -47,46 +48,38 @@ public class EnemyXml
         EnemyDocument.AppendChild(EnemyElement);
 
         // 몬스터 이름으로 엘리멘트 생성
-        XmlElement element = EnemyDocument.CreateElement(_info.unitName);
-        EnemyElement.AppendChild(element);
+        XmlElement EnemyList = EnemyDocument.CreateElement(_info.unitName);
+        EnemyElement.AppendChild(EnemyList);
+        XmlElement element = EnemyDocument.CreateElement("enemy");
         element.SetAttribute("Strength", _info.strength.ToString());
         element.SetAttribute("Defence", _info.defence.ToString());
         element.SetAttribute("Power", _info.power.ToString());
         element.SetAttribute("HP", _info.healthPoint.ToString());
         element.SetAttribute("Speed", _info.speed.ToString());
         element.SetAttribute("Evasion", _info.evasion.ToString());
-        EnemyElement.AppendChild(element);
+        EnemyList.AppendChild(element);
 
         EnemyDocument.Save(_filePath);
     }
 
     // filePath 의 xml 파일을 불러와 값을 입력 시킨다.
-    public static List<Enemy> StageLoad(string _filePath, string _unitName)
+    public static void EnemyLoad(Enemy _enemy, string _filePath, string _unitName)
     {
         XmlDocument EnemyDocument = new XmlDocument();
         // 경로에 해당하는 파일을 불러옴
         EnemyDocument.Load(_filePath);
 
-        // StageList 에 해당하는 모든 정보를 받아옴
-        XmlElement EnemyListElement = EnemyDocument[_unitName];
+        // _unitName 과 똑같은 정보를 받아옴
+        XmlElement EnemyListElement = EnemyDocument["EnemyList"][_unitName];
 
-        // 반환해줄 리스트 생성
-        List<Enemy> EnemyList = new List<Enemy>();
-
-        foreach (XmlElement StageElement in EnemyListElement.ChildNodes)
+        foreach (XmlElement element in EnemyListElement.ChildNodes)
         {
-            Enemy info = new Enemy();
-            info.strength = System.Convert.ToInt32(StageElement.GetAttribute("Strength"));
-            info.defence = System.Convert.ToInt32(StageElement.GetAttribute("Defence"));
-            info.power = System.Convert.ToInt32(StageElement.GetAttribute("Power"));
-            info.healthPoint = System.Convert.ToInt32(StageElement.GetAttribute("HP"));
-            info.speed = System.Convert.ToInt32(StageElement.GetAttribute("Speed"));
-            info.evasion = System.Convert.ToInt32(StageElement.GetAttribute("Evasion"));
-
-            // 리스트에 하나씩 추가
-            EnemyList.Add(info);
+            _enemy.strength = System.Convert.ToInt32(element.GetAttribute("Strength"));
+            _enemy.defence = System.Convert.ToInt32(element.GetAttribute("Defence"));
+            _enemy.power = System.Convert.ToInt32(element.GetAttribute("Power"));
+            _enemy.healthPoint = System.Convert.ToInt32(element.GetAttribute("HP"));
+            _enemy.speed = System.Convert.ToInt32(element.GetAttribute("Speed"));
+            _enemy.evasion = System.Convert.ToInt32(element.GetAttribute("Evasion"));
         }
-
-        return EnemyList;
     }
 }

@@ -17,7 +17,7 @@ public class UnitEntity : ScriptableObject {
 
     void Awake()
     {
-        LoadData();
+        //LoadData();
     }
 
     // 데미지를 0부터 최대 값까지.
