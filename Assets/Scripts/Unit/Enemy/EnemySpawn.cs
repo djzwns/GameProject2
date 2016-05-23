@@ -32,7 +32,7 @@ public class EnemySpawn : MonoBehaviour {
     private StageInfo stage;
 
     // 몬스터 종류
-    private enum EnemyType
+    public enum EnemyType
     {
         BASIC   = 0,
         ATTACK  = 1,
@@ -66,20 +66,29 @@ public class EnemySpawn : MonoBehaviour {
         while (currentEnemy < enemyCount)
         {
             yield return new WaitForSeconds(spawnTime);
-            GameObject temp = Instantiate(pfEnemy[stage.stageNumber % 10], spawn.transform.position, Quaternion.identity) as GameObject;
+            int stageNum = (int)(stage.stageNumber * 0.1f);
+
+            GameObject temp = Instantiate(pfEnemy[stageNum], spawn.transform.position, Quaternion.identity) as GameObject;
+            Enemy tempEnemy = (Enemy)temp.GetComponent<EnemyController>().Enemy;
+            SetEnemyName(tempEnemy, stageNum);
+            tempEnemy.LoadData();
+
             SpriteRenderer tempSprite = temp.GetComponent<SpriteRenderer>();
 
             EnemyType type = arrApear[currentEnemy];
             if (EnemyType.BASIC == type)
             {
+                tempEnemy.type = EnemyType.BASIC;
                 tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName);
             }
             else if (EnemyType.ATTACK == type)
             {
+                tempEnemy.type = EnemyType.ATTACK;
                 tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "_att");
             }
             else if (EnemyType.DEFENCE == type)
             {
+                tempEnemy.type = EnemyType.DEFENCE;
                 tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "_def");
             }
 
@@ -128,6 +137,35 @@ public class EnemySpawn : MonoBehaviour {
             ++currentEnemy;
         }
         currentEnemy = 0;
+    }
+
+    /// 몬스터 이름 설정
+    void SetEnemyName(Enemy _enemy, int _stage)
+    {
+        switch (_stage)
+        {
+            case 0:
+                _enemy.unitName = "goblin";
+                break;
+            case 1:
+                _enemy.unitName = "alligator";
+                break;
+            case 2:
+                _enemy.unitName = "alligator";
+                break;
+            case 3:
+                _enemy.unitName = "alligator";
+                break;
+            case 4:
+                _enemy.unitName = "alligator";
+                break;
+            case 5:
+                _enemy.unitName = "alligator";
+                break;
+            case 6:
+                _enemy.unitName = "alligator";
+                break;
+        }
     }
 
     /// 스크립트 활성화 될 때 실행
