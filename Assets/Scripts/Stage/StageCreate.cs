@@ -39,7 +39,7 @@ public class StageCreate : MonoBehaviour
             temp.transform.parent = RootBackgroundObject.transform;
         }
         BoxCollider2D box2D = GameObject.Find("FloorBoxCollider").GetComponent<BoxCollider2D>();
-        box2D.offset = new Vector2(fLocalSpriteSizeX, box2D.offset.y);
+        box2D.offset = new Vector2(fLocalSpriteSizeX * 0.5f * (BGCount - 1), box2D.offset.y);
         box2D.size = new Vector2(BGCount * fLocalSpriteSizeX, box2D.size.y);   
         //pfEnemy = new GameObject[enemyCount];
     }
