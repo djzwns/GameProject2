@@ -5,14 +5,15 @@ using System.Collections;
 public class UnitEntity : ScriptableObject {
     public string unitName;
     public int defence = 0;            // 방어력
-    public int strength = 500;         // 공격력
-    public int power = 100;            // 힘
-    public float healthPoint = 5000f;  // 최대 체력
+    public int strength = 50;         // 공격력
+    public int power = 20;            // 힘
+    public float healthPoint = 1000;  // 최대 체력
     public float speed = 2f;           // 이동속도
     [SerializeField]
     protected float currentHealthPoint;// 현재 체력
+    public float CurrentHealthPoint { get { return currentHealthPoint; } }
     protected float jumpPower = 3f;    // 점프력
-    protected float attackSpeed = 0.5f;
+    protected float attackSpeed = 1f;
     public int evasion = 0;     // 회피율
 
     void Awake()
@@ -21,7 +22,7 @@ public class UnitEntity : ScriptableObject {
     }
 
     // 데미지를 0부터 최대 값까지.
-    public virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(float amount)
     {
         // 회피율에 따라 데미지를 주거나 못주거나.
         if (evasion >= Random.Range(1, 100))
@@ -37,7 +38,10 @@ public class UnitEntity : ScriptableObject {
     // unit을 공격 한다.
     public virtual void Attack(UnitEntity unit)
     {
-        unit.TakeDamage(strength);
+        // 데미지를 80~120% 랜덤하게 줌
+        float damage = strength * Random.Range(0.8f, 1.2f);
+
+        unit.TakeDamage(damage);
     }
 
     // 죽었는지 체크함, 죽으면 true 반환

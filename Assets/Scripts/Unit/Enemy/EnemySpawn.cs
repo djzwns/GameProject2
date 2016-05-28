@@ -151,7 +151,7 @@ public class EnemySpawn : MonoBehaviour {
                 _enemy.unitName = "alligator";
                 break;
             case 2:
-                _enemy.unitName = "alligator";
+                _enemy.unitName = "snowman";
                 break;
             case 3:
                 _enemy.unitName = "alligator";

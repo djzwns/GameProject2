@@ -11,4 +11,14 @@
   <Stage StageNumber="9" BGCount="5" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
   <Stage StageNumber="10" BGCount="3" GameMode="0" BasicEnemy="4" DefenceEnemy="2" AttackEnemy="3" />
   <Stage StageNumber="11" BGCount="3" GameMode="1" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="12" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="13" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="14" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="15" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="16" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="17" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="18" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="19" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="20" BGCount="3" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
+  <Stage StageNumber="21" BGCount="2" GameMode="0" BasicEnemy="1" DefenceEnemy="0" AttackEnemy="0" />
 </StageList>
