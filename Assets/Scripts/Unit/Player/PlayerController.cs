@@ -3,9 +3,44 @@ using System.Collections;
 
 public class PlayerController : UnitController
 {
+    private string txtStrength = "strength";
+    private string txtHP = "hp";
+    private string txtPower = "power";
 
-	// Use this for initialization
-	void Awake () {
+    void OnGUI()
+    {
+        Rect stage = new Rect(0, 100, 100, 50);
+        txtStrength = GUI.TextField(stage, txtStrength);
+        GUI.Label(stage, "공격력");
+
+        Rect name = new Rect(100, 100, 100, 50);
+        txtHP = GUI.TextField(name, txtHP);
+        GUI.Label(name, "체력");
+
+        Rect power = new Rect(200, 100, 100, 50);
+        txtPower = GUI.TextField(power, txtPower);
+        GUI.Label(power, "힘");
+
+        Rect click = new Rect(300, 100, 100, 50);
+        if (GUI.Button(click, "적용"))
+        {
+            SetAttribute();
+            Time.timeScale = 1f;
+        }
+    }
+
+    void SetAttribute()
+    {
+        player.strength = System.Convert.ToInt32(txtStrength);
+        player.healthPoint = System.Convert.ToInt32(txtHP);
+        player.CurrentHealthPoint = player.healthPoint;
+        player.power = System.Convert.ToInt32(txtPower);
+    }
+
+    // Use this for initialization
+    void Awake ()
+    {
+        Time.timeScale = 0f;
         player = Player.Instance;
 	}
 	

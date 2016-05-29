@@ -11,7 +11,8 @@ public class UnitEntity : ScriptableObject {
     public float speed = 2f;           // 이동속도
     [SerializeField]
     protected float currentHealthPoint;// 현재 체력
-    public float CurrentHealthPoint { get { return currentHealthPoint; } }
+    public float CurrentHealthPoint { get { return currentHealthPoint; }
+        set { currentHealthPoint = value; } }
     protected float jumpPower = 3f;    // 점프력
     protected float attackSpeed = 1f;
     public int evasion = 0;     // 회피율
