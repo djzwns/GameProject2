@@ -1,0 +1,11 @@
+<EnemyList>
+  <goblin>
+    <enemy Strength="10" Defence="0" Power="16" HP="60" Speed="2" Evasion="0" />
+  </goblin>
+  <alligator>
+    <enemy Strength="30" Defence="0" Power="19" HP="140" Speed="2" Evasion="0" />
+  </alligator>
+  <snowman>
+    <enemy Strength="30" Defence="0" Power="19" HP="280" Speed="2" Evasion="0" />
+  </snowman>
+</EnemyList>

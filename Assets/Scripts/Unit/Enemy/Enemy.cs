@@ -84,8 +84,19 @@ public class EnemyXml
     public static void EnemyLoad(Enemy _enemy, string _filePath, string _unitName)
     {
         XmlDocument EnemyDocument = new XmlDocument();
-        // 경로에 해당하는 파일을 불러옴
-        EnemyDocument.Load(_filePath);
+        // 안드로이드에서 불러오기
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            TextAsset textAsset = (TextAsset)Resources.Load("EnemyList", typeof(TextAsset));
+
+            EnemyDocument.LoadXml(textAsset.text);
+        }
+        else// if(Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            // 경로에 해당하는 파일을 불러옴
+            EnemyDocument.Load(_filePath);
+        }
+        
 
         // _unitName 과 똑같은 정보를 받아옴
         XmlElement EnemyListElement = EnemyDocument["EnemyList"][_unitName];

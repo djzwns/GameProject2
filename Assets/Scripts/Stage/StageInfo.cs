@@ -62,16 +62,18 @@ public class StageXml
         // 안드로이드에서 불러오기
         if (Application.platform == RuntimePlatform.Android)
         {
-            string strFile = "Stage.xml";
-            string strFilePath = Application.persistentDataPath + "/" + strFile;
-            if (!System.IO.File.Exists(strFilePath))
-            {
-                WWW wwwUrl = new WWW("jar:file://" + Application.dataPath + "!/assets/" + strFile);
-                System.IO.File.WriteAllBytes(strFilePath, wwwUrl.bytes);
-            }
-
-            Debug.Log(strFilePath);
-            StageDocument.Load(strFilePath);
+            //string strFile = "Stage.xml";
+            //string strFilePath = Application.persistentDataPath + "/" + strFile;
+            //if (!System.IO.File.Exists(strFilePath))
+            //{
+            //    WWW wwwUrl = new WWW("jar:file://" + Application.dataPath + "!/assets/" + strFile);
+            //    System.IO.File.WriteAllBytes(strFilePath, wwwUrl.bytes);
+            //}
+            
+            //StageDocument.Load(strFilePath);
+            TextAsset textAsset = (TextAsset)Resources.Load("Stage", typeof(TextAsset));
+            //XmlDocument xmldoc = new XmlDocument();
+            StageDocument.LoadXml(textAsset.text);
         }
         else// if(Application.platform == RuntimePlatform.WindowsEditor)
         {
