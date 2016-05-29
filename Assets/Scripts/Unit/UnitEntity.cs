@@ -5,8 +5,8 @@ using System.Collections;
 public class UnitEntity : ScriptableObject {
     public string unitName;
     public int defence = 0;            // 방어력
-    public int strength = 50;         // 공격력
-    public int power = 20;            // 힘
+    public float strength = 50f;       // 공격력
+    public float power = 20;           // 힘
     public float healthPoint = 1000;  // 최대 체력
     public float speed = 2f;           // 이동속도
     [SerializeField]
@@ -57,8 +57,8 @@ public class UnitEntity : ScriptableObject {
     public virtual void SaveData()
     {
         PlayerPrefs.SetInt(unitName + "Defence", defence);
-        PlayerPrefs.SetInt(unitName + "Strength", strength);
-        PlayerPrefs.SetInt(unitName + "Power", power);
+        PlayerPrefs.SetFloat(unitName + "Strength", strength);
+        PlayerPrefs.SetFloat(unitName + "Power", power);
         PlayerPrefs.SetFloat(unitName + "HelthPoint", healthPoint);
         PlayerPrefs.SetFloat(unitName + "Speed", speed);
     }
@@ -67,8 +67,8 @@ public class UnitEntity : ScriptableObject {
     public virtual void LoadData()
     {
         defence = PlayerPrefs.GetInt(unitName + "Defence", defence);
-        strength = PlayerPrefs.GetInt(unitName + "Strength", strength);
-        power = PlayerPrefs.GetInt(unitName + "Power", power);
+        strength = PlayerPrefs.GetFloat(unitName + "Strength", strength);
+        power = PlayerPrefs.GetFloat(unitName + "Power", power);
         healthPoint = PlayerPrefs.GetFloat(unitName + "HelthPoint", healthPoint);
         speed = PlayerPrefs.GetFloat(unitName + "Speed", speed);
         currentHealthPoint = healthPoint;

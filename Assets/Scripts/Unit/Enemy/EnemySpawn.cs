@@ -35,8 +35,8 @@ public class EnemySpawn : MonoBehaviour {
     public enum EnemyType
     {
         BASIC   = 0,
-        ATTACK  = 1,
-        DEFENCE = 2,
+        STRONG  = 1,
+        INSANE = 2,
         BOSS    = 4
     }
 
@@ -78,20 +78,23 @@ public class EnemySpawn : MonoBehaviour {
             EnemyType type = arrApear[currentEnemy];
             if (EnemyType.BASIC == type)
             {
+                temp.transform.localScale = new Vector2(0.8f, 0.8f);
                 tempEnemy.type = EnemyType.BASIC;
                 tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName);
             }
-            else if (EnemyType.ATTACK == type)
+            else if (EnemyType.STRONG == type)
             {
-                tempEnemy.type = EnemyType.ATTACK;
-                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "_att");
+                temp.transform.localScale = new Vector2(0.5f, 0.5f);
+                tempEnemy.type = EnemyType.STRONG;
+                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "1");
             }
-            else if (EnemyType.DEFENCE == type)
+            else if (EnemyType.INSANE == type)
             {
-                tempEnemy.type = EnemyType.DEFENCE;
-                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "_def");
+                tempEnemy.type = EnemyType.INSANE;
+                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "2");
             }
-
+            // 타입별 능력치 세팅
+            tempEnemy.AttributeSet(tempEnemy.type);
             // 생성된 오브젝트를 spawn 하위 오브젝트로 넣어줌
             temp.transform.parent = spawn.transform;
             ++currentEnemy;
@@ -112,12 +115,12 @@ public class EnemySpawn : MonoBehaviour {
 
             else if (attackEnemy < stage.attackEnemyCount)
             {
-                arrApear[currentEnemy] = EnemyType.ATTACK;
+                arrApear[currentEnemy] = EnemyType.STRONG;
                 ++attackEnemy;
             }
             else if (defenceEnemy < stage.defenceEnemyCount)
             {
-                arrApear[currentEnemy] = EnemyType.DEFENCE;
+                arrApear[currentEnemy] = EnemyType.INSANE;
                 ++defenceEnemy;
             }
             ++currentEnemy;

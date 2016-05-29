@@ -25,6 +25,24 @@ public class Enemy : UnitEntity
     {
         base.Attack(unit);
     }
+
+    public void AttributeSet(EnemySpawn.EnemyType _type)
+    {
+        switch (_type)
+        {
+            case EnemySpawn.EnemyType.STRONG:
+                healthPoint = healthPoint * 1.5f;
+                strength = strength * 1.2f;
+                power = power * 1.2f;
+                break;
+            case EnemySpawn.EnemyType.INSANE:
+                healthPoint = healthPoint * 2.0f;
+                strength = strength * 1.5f;
+                power = power * 1.5f;
+                break;
+        }
+        currentHealthPoint = healthPoint;
+    }
 }
 
 public class EnemyXml
