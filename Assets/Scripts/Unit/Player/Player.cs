@@ -24,6 +24,7 @@ public class Player : UnitEntity {
     {
         unitName = "player";
         evasion = 20;
+        attackSpeed = 0.25f;
     }
 
     // 함수 재정의 -----------------------------------------------------

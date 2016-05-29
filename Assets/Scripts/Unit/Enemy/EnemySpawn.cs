@@ -42,7 +42,7 @@ public class EnemySpawn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        enemyCount = stage.attackEnemyCount + stage.basicEnemyCount + stage.defenceEnemyCount;
+        enemyCount = stage.strongEnemyCount + stage.basicEnemyCount + stage.insaneEnemyCount;
         arrApear = new EnemyType[enemyCount];
         CreateEnemyList();
         EnemyListSuffle();
@@ -113,12 +113,12 @@ public class EnemySpawn : MonoBehaviour {
                 ++basicEnemy;
             }
 
-            else if (attackEnemy < stage.attackEnemyCount)
+            else if (attackEnemy < stage.strongEnemyCount)
             {
                 arrApear[currentEnemy] = EnemyType.STRONG;
                 ++attackEnemy;
             }
-            else if (defenceEnemy < stage.defenceEnemyCount)
+            else if (defenceEnemy < stage.insaneEnemyCount)
             {
                 arrApear[currentEnemy] = EnemyType.INSANE;
                 ++defenceEnemy;

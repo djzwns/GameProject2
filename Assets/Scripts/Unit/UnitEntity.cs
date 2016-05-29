@@ -7,7 +7,7 @@ public class UnitEntity : ScriptableObject {
     public int defence = 0;            // 방어력
     public float strength = 50f;       // 공격력
     public float power = 20;           // 힘
-    public float healthPoint = 1000;  // 최대 체력
+    public float healthPoint = 500f;  // 최대 체력
     public float speed = 2f;           // 이동속도
     [SerializeField]
     protected float currentHealthPoint;// 현재 체력

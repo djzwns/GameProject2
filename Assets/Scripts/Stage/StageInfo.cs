@@ -18,8 +18,8 @@ public class StageInfo
 
     // 적 관련
     public int basicEnemyCount      = 1;    // 일반 몬스터
-    public int defenceEnemyCount    = 0;    // 방어 몬스터
-    public int attackEnemyCount     = 0;    // 공격 몬스터
+    public int strongEnemyCount    = 0;    // 방어 몬스터
+    public int insaneEnemyCount     = 0;    // 공격 몬스터
 }
 
 public class StageXml
@@ -47,8 +47,8 @@ public class StageXml
         element.SetAttribute("BGCount", _info.bgCount.ToString());
         element.SetAttribute("GameMode", System.Convert.ToInt32(_info.gameMode).ToString());
         element.SetAttribute("BasicEnemy", _info.basicEnemyCount.ToString());
-        element.SetAttribute("DefenceEnemy", _info.defenceEnemyCount.ToString());
-        element.SetAttribute("AttackEnemy", _info.attackEnemyCount.ToString());
+        element.SetAttribute("StrongEnemy", _info.strongEnemyCount.ToString());
+        element.SetAttribute("InsaneEnemy", _info.insaneEnemyCount.ToString());
         StageElement.AppendChild(element);
 
         StageDocument.Save(_filePath);
@@ -58,8 +58,26 @@ public class StageXml
     public static List<StageInfo> StageLoad(string _filePath)
     {
         XmlDocument StageDocument = new XmlDocument();
-        // 경로에 해당하는 파일을 불러옴
-        StageDocument.Load(_filePath);
+
+        // 안드로이드에서 불러오기
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            string strFile = "Stage.xml";
+            string strFilePath = Application.persistentDataPath + "/" + strFile;
+            if (!System.IO.File.Exists(strFilePath))
+            {
+                WWW wwwUrl = new WWW("jar:file://" + Application.dataPath + "!/assets/" + strFile);
+                System.IO.File.WriteAllBytes(strFilePath, wwwUrl.bytes);
+            }
+
+            Debug.Log(strFilePath);
+            StageDocument.Load(strFilePath);
+        }
+        else// if(Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            // 경로에 해당하는 파일을 불러옴
+            StageDocument.Load(_filePath);
+        }
 
         // StageList 에 해당하는 모든 정보를 받아옴
         XmlElement StageListElement = StageDocument["StageList"];
@@ -74,8 +92,8 @@ public class StageXml
             info.bgCount = System.Convert.ToInt32(StageElement.GetAttribute("BGCount"));
             info.gameMode = (GAMEMODE.Gamemode)System.Convert.ToInt32(StageElement.GetAttribute("GameMode"));
             info.basicEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("BasicEnemy"));
-            info.defenceEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("DefenceEnemy"));
-            info.attackEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("AttackEnemy"));
+            info.strongEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("StrongEnemy"));
+            info.insaneEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("InsaneEnemy"));
 
             // 리스트에 하나씩 추가
             StageList.Add(info);
