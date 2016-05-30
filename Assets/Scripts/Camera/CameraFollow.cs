@@ -16,6 +16,7 @@ public class CameraFollow : MonoBehaviour {
     
 	void Start ()
     {
+        Screen.SetResolution(Screen.height * 128 / 80, Screen.height, true);
         player = GameObject.Find("player").transform;
         stageManager = StageManager.Instance;
 
