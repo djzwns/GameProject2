@@ -12,14 +12,17 @@ public class StageCreate : MonoBehaviour
 
     // 스테이지 매니저
     private StageManager stageManager;
-    
+
     // 스테이지 초기 설정
-	void Awake ()
+    void Awake()
     {
         stageManager = StageManager.Instance;
         // 스프라이트의 크기를 받아옴
         fLocalSpriteSizeX = pfBackground.GetComponent<SpriteRenderer>().bounds.max.x * 2;
-        
+    }
+
+    public void CreateStage()
+    {
         // 스프라이트 이미지 받아옴
         sprite = Resources.Load<Sprite>("Textures/background" + ((int)(stageManager.currentStage*0.1f) + 1));
 

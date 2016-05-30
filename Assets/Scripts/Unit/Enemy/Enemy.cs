@@ -13,11 +13,11 @@ public class Enemy : UnitEntity
     // 함수 재정의 -----------------------------
     public override void SaveData()
     {
-        EnemyXml.EnemySave(this, Application.dataPath + "/StreamingAssets/EnemyList.xml");
+        EnemyXml.EnemySave(this, Application.dataPath + "/Resources/EnemyList.xml");
     }
     public override void LoadData()
     {
-        EnemyXml.EnemyLoad(this, Application.dataPath + "/StreamingAssets/EnemyList.xml", unitName);
+        EnemyXml.EnemyLoad(this, Application.dataPath + "/Resources/EnemyList.xml", unitName);
         currentHealthPoint = healthPoint;
     }
 

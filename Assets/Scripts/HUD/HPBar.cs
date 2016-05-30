@@ -12,10 +12,10 @@ public class HPBar : MonoBehaviour
 
     public PlayerController playerInfo;
     Enemy enemyInfo;
-
+    
 
     // Use this for initialization
-    void Start()
+    void CreateHPBar()
     {
         hpbar = Instantiate(pfHPBar/*, HeadPosition.transform.position, Quaternion.identity*/) as GameObject;
         GameObject HPCanvas = GameObject.Find("HPBarCanvas");
@@ -49,8 +49,15 @@ public class HPBar : MonoBehaviour
             hpbarSlider.value = enemyInfo.CurrentHealthPoint / enemyInfo.healthPoint;
     }
 
+    void OnEnable()
+    {
+        CreateHPBar();
+    }
+
     void OnDisable()
     {
-        Destroy(hpbar);
+        //// 몬스터 것만 제거
+        //if (gameObject.tag == "enemy")
+            Destroy(hpbar);
     }
 }

@@ -20,16 +20,19 @@ public class CameraFollow : MonoBehaviour {
         player = GameObject.Find("player").transform;
         stageManager = StageManager.Instance;
 
-        StageCreate background = GameObject.Find("StageManager").GetComponent<StageCreate>();
-        // 스테이지에 따라 배경길이가 달라지므로
-        bgWidth = (stageManager.stage[stageManager.currentStage].bgCount-1) * background.fLocalSpriteSizeX;
+        //StageCreate background = GameObject.Find("StageManager").GetComponent<StageCreate>();
+        //// 스테이지에 따라 배경길이가 달라지므로
+        //bgWidth = (stageManager.stage[stageManager.currentStage].bgCount-1) * background.fLocalSpriteSizeX;
 
     }
 	
 	void LateUpdate () {
-        // 카메라 좌표 캐릭터 따라 부드럽게 움직이게 함.
-        transform.position = Vector3.Lerp(transform.position, player.transform.position, smoothMoveSpeed);
-        MoveLimit();
+        if (player.gameObject.activeSelf)
+        {
+            // 카메라 좌표 캐릭터 따라 부드럽게 움직이게 함.
+            transform.position = Vector3.Lerp(transform.position, player.transform.position, smoothMoveSpeed);
+            MoveLimit();
+        }
 	}
 
     void MoveLimit()
@@ -40,5 +43,12 @@ public class CameraFollow : MonoBehaviour {
         tempPos.z = -10f;
 
         transform.position = tempPos;
+    }
+
+    public void CamReset()
+    {
+        StageCreate background = GameObject.Find("StageManager").GetComponent<StageCreate>();
+        // 스테이지에 따라 배경길이가 달라지므로
+        bgWidth = (stageManager.stage[stageManager.currentStage].bgCount - 1) * background.fLocalSpriteSizeX;
     }
 }
