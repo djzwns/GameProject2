@@ -60,7 +60,6 @@ public class UnitEntity : ScriptableObject {
         PlayerPrefs.SetFloat(unitName + "Strength", strength);
         PlayerPrefs.SetFloat(unitName + "Power", power);
         PlayerPrefs.SetFloat(unitName + "HelthPoint", healthPoint);
-        PlayerPrefs.SetFloat(unitName + "Speed", speed);
     }
 
     // 속성들 불러오기
@@ -70,7 +69,6 @@ public class UnitEntity : ScriptableObject {
         strength = PlayerPrefs.GetFloat(unitName + "Strength", strength);
         power = PlayerPrefs.GetFloat(unitName + "Power", power);
         healthPoint = PlayerPrefs.GetFloat(unitName + "HelthPoint", healthPoint);
-        speed = PlayerPrefs.GetFloat(unitName + "Speed", speed);
         currentHealthPoint = healthPoint;
     }
 

@@ -4,6 +4,13 @@ using System.Collections;
 public class Player : UnitEntity {
     private static Player instance;
     private int accuracy = 80;    // 명중률
+    public int Accuracy { get{ return accuracy; } set{ accuracy = value; } }
+
+    private int gold = 1000;
+    public int Gold {get{ return gold; } }
+
+    private int arcadePoint = 100;
+    public int ArcadePoint { get{ return arcadePoint; } }
 
     // 인스턴스 받아옴
     public static Player Instance
@@ -27,6 +34,36 @@ public class Player : UnitEntity {
         attackSpeed = 0.25f;
     }
 
+    // 돈 사용
+    public bool UseGold(int _gold)
+    {
+        // 소유한 돈보다 많은 양을 필요로 할 떄 false
+        if (_gold > gold)
+        {
+            return false;
+        }
+        else
+        {
+            gold -= _gold;
+            return true;
+        }
+    }
+
+    // 아케이드 포인트 사용
+    public bool UseArcadePoint(int _ap)
+    {
+        // 소유한 포인트보다 많은 양을 필요로 할 떄 false
+        if (_ap > arcadePoint)
+        {
+            return false;
+        }
+        else
+        {
+            arcadePoint -= _ap;
+            return true;
+        }
+    }
+
     // 함수 재정의 -----------------------------------------------------
     // 데이터 저장
     public override void SaveData()
@@ -34,6 +71,8 @@ public class Player : UnitEntity {
         base.SaveData();
         PlayerPrefs.SetInt("Accuracy", accuracy);
         PlayerPrefs.SetInt("Evasion", evasion);
+        PlayerPrefs.SetInt("Gold", gold);
+        PlayerPrefs.SetInt("ArcadePoint", arcadePoint);
     }
 
     // 데이터 불러오기
@@ -42,6 +81,8 @@ public class Player : UnitEntity {
         base.LoadData();
         accuracy = PlayerPrefs.GetInt("Accuracy", accuracy);
         evasion = PlayerPrefs.GetInt("Evasion", evasion);
+        gold = PlayerPrefs.GetInt("Gold", gold);
+        arcadePoint = PlayerPrefs.GetInt("ArcadePoint", arcadePoint);
         //currentHealthPoint = healthPoint;
         jumpPower = jumpPower + (speed * 0.01f);
     }
