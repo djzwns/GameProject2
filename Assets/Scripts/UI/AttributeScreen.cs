@@ -2,51 +2,56 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class AttributeScreen : MonoBehaviour {
-    // 플레이어 정보 및 함수들 사용
-    private Player player;
-
+public class AttributeScreen : ScreenManager {
     // 플레이어 정보 출력할 텍스트
     // 체력, 공격력, 힘, 방어력, 명중률, 회피율, 돈, 아케이드 포인트
     public Text[] playerInfoText;
-    public Text[] increaseAmount;
+    public Text[] totalGainAmount;
     public Text[] price;
 
-    // 골드 구매 가격
-    private int healthGoldPrice = 10;
-    private int strengthGoldPrice = 10;
-    private int powerGoldPrice = 10;
+    // 골드 능력치 구매 가격
+    private int gold_healthPrice = 500;
+    private int gold_strengthPrice = 500;
+    private int gold_powerPrice = 500;
 
-    // 골드 구매 증가량
-    private int increaseHealth_Gold = 10;
-    private int increaseStrength_Gold = 10;
-    private int increasePower_Gold = 1;
+    // 골드 능력치 증가량
+    private int gold_increaseHealth = 50;
+    private int gold_increaseStrength = 5;
+    private int gold_increasePower = 1;
+
+    // 골드 구매로 그 동안 얼만큼 증가시켰는지 누적 증가량
+    private int gold_totalGainHealth = 0;
+    private int gold_totalGainStrength = 0;
+    private int gold_totalGainPower = 0;
 
     // 아케이드 포인트 구매 가격
-    private int healthAPPrice = 1;
-    private int strengthAPPrice = 1;
-    private int defenceAPPrice = 1;
-    private int accuracyAPPrice = 1;
-    private int evasionAPPrice = 1;
+    private int ap_healthPrice = 1;
+    private int ap_strengthPrice = 1;
+    private int ap_defencePrice = 1;
+    private int ap_accuracyPrice = 1;
+    private int ap_evasionPrice = 1;
 
     // 아케이드 포인트 구매 증가량
-    private int increaseHealth_AP = 1;       // 퍼센트 증가
-    private int increaseStrength_AP = 1;     // 퍼센트 증가
-    private int increaseDefence_AP = 1;      // 퍼센트 x   증가량 고정
-    private int increaseAccuracy_AP = 1;     // 퍼센트 x   증가량 고정
-    private int increaseEvasion_AP = 1;      // 퍼센트 x   증가량 고정
+    private int ap_increaseHealth = 1;       // 퍼센트 증가
+    private int ap_increaseStrength = 1;     // 퍼센트 증가
+    private int ap_increaseDefence = 2;      // 퍼센트 x   증가량 고정
+    private int ap_increaseAccuracy = 1;     // 퍼센트 x   증가량 고정
+    private int ap_increaseEvasion = 1;      // 퍼센트 x   증가량 고정
+
+    // 골드 구매로 그 동안 얼만큼 증가시켰는지 누적 증가량
+    private int ap_totalGainHealth = 0;
+    private int ap_totalGainStrength = 0;
+    private int ap_totalGainDefence = 0;
+    private int ap_totalGainAccuracy = 0;
+    private int ap_totalGainEvasion = 0;
+
 
     // 골드 총 사용량
     private int usedGold = 0;
     // 아케이드 포인트 총 사용량
     private int usedAP = 0;
 
-    void Start()
-    {
-        player = Player.Instance;
-    }
-
-    // Update is called once per frame
+    // 버튼 누르면 업뎃
     void Update()
     {
         PlayerAttributeUpdate();
@@ -68,31 +73,23 @@ public class AttributeScreen : MonoBehaviour {
 
     void IncreaseAmountUpdate()
     {
-        increaseAmount[0].text = increaseHealth_Gold.ToString();
-        price[0].text = healthGoldPrice.ToString();
-        increaseAmount[1].text = increaseStrength_Gold.ToString();
-        price[1].text = strengthGoldPrice.ToString();
-        increaseAmount[2].text = increasePower_Gold.ToString();
-        price[2].text = powerGoldPrice.ToString();
+        totalGainAmount[0].text = gold_totalGainHealth.ToString();
+        price[0].text = gold_healthPrice.ToString();
+        totalGainAmount[1].text = gold_totalGainStrength.ToString();
+        price[1].text = gold_strengthPrice.ToString();
+        totalGainAmount[2].text = gold_totalGainPower.ToString();
+        price[2].text = gold_powerPrice.ToString();
 
-        increaseAmount[3].text = increaseHealth_AP.ToString();
-        price[3].text = healthAPPrice.ToString();
-        increaseAmount[4].text = increaseStrength_AP.ToString();
-        price[4].text = strengthAPPrice.ToString();
-        increaseAmount[5].text = increaseDefence_AP.ToString();
-        price[5].text = defenceAPPrice.ToString();
-        increaseAmount[6].text = increaseAccuracy_AP.ToString();
-        price[6].text = accuracyAPPrice.ToString();
-        increaseAmount[7].text = increaseEvasion_AP.ToString();
-        price[7].text = evasionAPPrice.ToString();
-    }
-
-    // 돈, 아케이드 포인트 업데이트
-    void PlayerMoneyUpdate()
-    {
-        // 골드, 아케이드 포인트 각각 입력
-        playerInfoText[6].text = player.Gold.ToString();
-        playerInfoText[7].text = player.ArcadePoint.ToString();
+        totalGainAmount[3].text = ap_totalGainHealth.ToString();
+        price[3].text = ap_healthPrice.ToString();
+        totalGainAmount[4].text = ap_totalGainStrength.ToString();
+        price[4].text = ap_strengthPrice.ToString();
+        totalGainAmount[5].text = ap_totalGainDefence.ToString();
+        price[5].text = ap_defencePrice.ToString();
+        totalGainAmount[6].text = ap_totalGainAccuracy.ToString();
+        price[6].text = ap_accuracyPrice.ToString();
+        totalGainAmount[7].text = ap_totalGainEvasion.ToString();
+        price[7].text = ap_evasionPrice.ToString();
     }
 
 
@@ -113,37 +110,37 @@ public class AttributeScreen : MonoBehaviour {
     // 체력 구매
     public void PurchaseHealthGold()
     {
-        if (player.UseGold(healthGoldPrice))
+        if (player.UseGold(gold_healthPrice))
         {
-            usedGold += healthGoldPrice;
+            usedGold += gold_healthPrice;
 
-            player.healthPoint += increaseHealth_Gold;
-            healthGoldPrice += 10;
-            increaseHealth_Gold += 10;
+            player.healthPoint += gold_increaseHealth;
+            gold_healthPrice += 10;
+            gold_totalGainHealth += gold_increaseHealth;
         }
     }
     // 공격력 구매
     public void PurchaseStrenghGold()
     {
-        if (player.UseGold(strengthGoldPrice))
+        if (player.UseGold(gold_strengthPrice))
         {
-            usedGold += strengthGoldPrice;
+            usedGold += gold_strengthPrice;
 
-            player.strength += increaseStrength_Gold;
-            strengthGoldPrice += 10;
-            increaseStrength_Gold += 10;
+            player.strength += gold_increaseStrength;
+            gold_strengthPrice += 10;
+            gold_totalGainStrength += gold_increaseStrength;
         }
     }
     // 힘 구매
     public void PurchasePowerGold()
     {
-        if (player.UseGold(powerGoldPrice))
+        if (player.UseGold(gold_powerPrice))
         {
-            usedGold += powerGoldPrice;
+            usedGold += gold_powerPrice;
 
-            player.power += increasePower_Gold;
-            powerGoldPrice += 10;
-            increasePower_Gold += 1;
+            player.power += gold_increasePower;
+            gold_powerPrice += 10;
+            gold_totalGainPower += gold_increasePower;
         }
     }
 
@@ -154,56 +151,59 @@ public class AttributeScreen : MonoBehaviour {
     // 체력
     public void PurchaseHealthAP()
     {
-        if (player.UseArcadePoint(healthAPPrice))
+        if (player.UseArcadePoint(ap_healthPrice))
         {
-            usedAP += healthAPPrice;
+            usedAP += ap_healthPrice;
 
-            healthAPPrice += 1;
-            increaseHealth_AP += 1;
+            ap_healthPrice += 1;
+            ap_totalGainHealth += ap_increaseHealth;
         }
     }
     // 공격력
     public void PurchaseStrenthAP()
     {
-        if (player.UseArcadePoint(strengthAPPrice))
+        if (player.UseArcadePoint(ap_strengthPrice))
         {
-            usedAP += strengthAPPrice;
+            usedAP += ap_strengthPrice;
 
-            strengthAPPrice += 1;
-            increaseStrength_AP += 1;
+            ap_strengthPrice += 1;
+            ap_totalGainStrength += ap_increaseStrength;
         }
     }
     // 방어력
     public void PurchaseDefenceAP()
     {
-        if (player.UseArcadePoint(defenceAPPrice))
+        if (player.UseArcadePoint(ap_defencePrice))
         {
-            usedAP += defenceAPPrice;
+            usedAP += ap_defencePrice;
 
-            player.defence += increaseDefence_AP;
-            defenceAPPrice += 1;
+            player.defence += ap_increaseDefence;
+            ap_defencePrice += 1;
+            ap_totalGainDefence += ap_increaseDefence;
         }
     }
     // 명중률
     public void PurchaseAccuracyAP()
     {
-        if (player.UseArcadePoint(accuracyAPPrice))
+        if (player.UseArcadePoint(ap_accuracyPrice))
         {
-            usedAP += accuracyAPPrice;
+            usedAP += ap_accuracyPrice;
 
-            player.Accuracy += increaseAccuracy_AP;
-            accuracyAPPrice += 1;
+            player.Accuracy += ap_increaseAccuracy;
+            ap_accuracyPrice += 1;
+            ap_totalGainAccuracy += ap_increaseAccuracy;
         }
     }
     // 회피율
     public void PurchaseEvasionAP()
     {
-        if (player.UseArcadePoint(evasionAPPrice))
+        if (player.UseArcadePoint(ap_evasionPrice))
         {
-            usedAP += evasionAPPrice;
+            usedAP += ap_evasionPrice;
 
-            player.evasion += increaseEvasion_AP;
-            evasionAPPrice += 1;
+            player.evasion += ap_increaseEvasion;
+            ap_evasionPrice += 1;
+            ap_totalGainEvasion += ap_increaseEvasion;
         }
     }
 
@@ -211,14 +211,14 @@ public class AttributeScreen : MonoBehaviour {
     // AttributeScreen 활성화
     public void ScreenEnable()
     {
-        SaveAttribute();
+        LoadAttribute();
         gameObject.SetActive(true);
     }
 
     // AttributeScreen 비활성화
     public void ScreenDisable()
     {
-        LoadAttribute();
+        SaveAttribute();
         gameObject.SetActive(false);
     }
 }
