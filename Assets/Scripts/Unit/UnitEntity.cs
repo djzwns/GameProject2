@@ -44,6 +44,12 @@ public class UnitEntity : ScriptableObject {
         unit.TakeDamage(damage);
     }
 
+    // 리셋
+    public void UnitReset()
+    {
+        currentHealthPoint = healthPoint;
+    }
+
     // 죽었는지 체크함, 죽으면 true 반환
     public bool IsDead()
     {

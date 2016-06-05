@@ -84,7 +84,7 @@ public class Player : UnitEntity {
         gold = PlayerPrefs.GetInt("Gold", gold);
         arcadePoint = PlayerPrefs.GetInt("ArcadePoint", arcadePoint);
         //currentHealthPoint = healthPoint;
-        jumpPower = jumpPower + (speed * 0.01f);
+        //jumpPower = jumpPower + (speed * 0.01f);
     }
 
     public override void Attack(UnitEntity unit)

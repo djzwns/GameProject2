@@ -9,6 +9,7 @@ public class StageCreate : MonoBehaviour
     private SpriteRenderer background;
     private Sprite sprite;
     public float fLocalSpriteSizeX;
+    private int BGCount = 0;
 
     // 스테이지 매니저
     private StageManager stageManager;
@@ -27,9 +28,11 @@ public class StageCreate : MonoBehaviour
         sprite = Resources.Load<Sprite>("Textures/background" + ((int)(stageManager.currentStage*0.1f) + 1));
 
         // 부모 오브젝트 찾기
-        RootBackgroundObject = GameObject.Find("BackGround");
+        //RootBackgroundObject = GameObject.Find("BackGround");
+        // 부모 오브젝트 생성
+        RootBackgroundObject = new GameObject("BackGround");
 
-        int BGCount = stageManager.stage[stageManager.currentStage].bgCount;
+        BGCount = stageManager.stage[stageManager.currentStage].bgCount;
         // 배경 수 만큼 프리팹 생성
         for (int i = 0; i < BGCount; ++i)
         {
@@ -45,5 +48,14 @@ public class StageCreate : MonoBehaviour
         box2D.offset = new Vector2(fLocalSpriteSizeX * 0.5f * (BGCount - 1), box2D.offset.y);
         box2D.size = new Vector2(BGCount * fLocalSpriteSizeX, box2D.size.y);   
         //pfEnemy = new GameObject[enemyCount];
+    }
+
+    // 만들었던 맵 파괴
+    public void RemoveStage()
+    {
+        for (int i = 0; i < BGCount; ++i)
+        {
+            Destroy(RootBackgroundObject);
+        }
     }
 }

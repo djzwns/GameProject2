@@ -42,13 +42,13 @@ public class EnemySpawn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        enemyCount = stage.strongEnemyCount + stage.basicEnemyCount + stage.insaneEnemyCount;
-        arrApear = new EnemyType[enemyCount];
-        CreateEnemyList();
-        EnemyListSuffle();
+        //enemyCount = stage.strongEnemyCount + stage.basicEnemyCount + stage.insaneEnemyCount;
+        //arrApear = new EnemyType[enemyCount];
+        //CreateEnemyList();
+        //EnemyListSuffle();
 
-        // 스폰 코루틴 실행
-        StartCoroutine("Spawn");
+        //// 스폰 코루틴 실행
+        //StartCoroutine("Spawn");
     }
 	
 	// Update is called once per frame
@@ -171,6 +171,18 @@ public class EnemySpawn : MonoBehaviour {
         }
     }
 
+    ///
+    void InitEnemy()
+    {
+        enemyCount = stage.strongEnemyCount + stage.basicEnemyCount + stage.insaneEnemyCount;
+        arrApear = new EnemyType[enemyCount];
+        CreateEnemyList();
+        EnemyListSuffle();
+
+        // 스폰 코루틴 실행
+        StartCoroutine("Spawn");
+    }
+
     /// 스크립트 활성화 될 때 실행
     void OnEnable()
     {
@@ -198,6 +210,7 @@ public class EnemySpawn : MonoBehaviour {
     public void StartSpawn()
     {
         gameObject.SetActive(true);
+        InitEnemy();
     }
 
     /// 비활성화

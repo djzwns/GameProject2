@@ -211,14 +211,17 @@ public class AttributeScreen : ScreenManager {
     // AttributeScreen 활성화
     public void ScreenEnable()
     {
-        LoadAttribute();
         gameObject.SetActive(true);
+        LoadAttribute();
     }
 
     // AttributeScreen 비활성화
     public void ScreenDisable()
     {
-        SaveAttribute();
-        gameObject.SetActive(false);
+        //if (gameObject.activeSelf)
+        //{
+            SaveAttribute();
+            gameObject.SetActive(false);
+        //}
     }
 }

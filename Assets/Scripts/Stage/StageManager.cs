@@ -8,11 +8,18 @@ public class StageManager : MonoBehaviour
     // 스테이지 정보
     private int CurrentStage = 0;        // 유저가 선택한 스테이지
     public int currentStage { get { return CurrentStage; } set { CurrentStage = value; } }
+
+    // 최고 달성 스테이지
+    [SerializeField]
+    private int achieveStage = 0;
+    public int AchieveStage { get{ return achieveStage; } }
+
     private List<StageInfo> Stage;
     public List<StageInfo> stage { get { return Stage; } }
 
     // 플레이어
     GameObject player;
+    Vector3 initPlayerPos;
 
     // 몬스터 스폰 매니저
     public EnemySpawn enemyManager;
@@ -40,6 +47,7 @@ public class StageManager : MonoBehaviour
     {
         StageCreator = GetComponent<StageCreate>();
         player = GameObject.Find("player");
+        initPlayerPos = player.transform.position;
     }
 
     void Start()
@@ -60,7 +68,15 @@ public class StageManager : MonoBehaviour
     // 스테이지 끝나면( 이기거나 지거나 )
     public void GameEnd()
     {
-        player.SetActive(false);
+        PlayerInit();
         enemyManager.EndSpawn();
+        StageCreator.RemoveStage();
+    }
+
+    private void PlayerInit()
+    {
+        player.transform.position = initPlayerPos;
+        player.GetComponent<PlayerController>().PlayerReset();
+        player.SetActive(false);
     }
 }
