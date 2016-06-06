@@ -5,9 +5,11 @@ using System.Collections;
 public class ScreenManager : MonoBehaviour {
     private Text gold;
     private Text arcade;
+
     private GameObject stage_attribute;
     public AttributeScreen attributeScreen;
     public StageSelectScreen stageSelectScreen;
+
     protected StageManager stage;
 
     // NONE 강화소-스테이지, ATTRIBUTE 강화소, STAGESELECT 스테이지 선택
@@ -23,8 +25,8 @@ public class ScreenManager : MonoBehaviour {
         stage = StageManager.Instance;
         player = Player.Instance;
 
-        gold = GameObject.Find("Gold").GetComponentInChildren<Text>();
-        arcade = GameObject.Find("ArcadePoint").GetComponentInChildren<Text>();
+        gold = GameObject.Find("Gold_AP").GetComponentsInChildren<Text>()[0];
+        arcade = GameObject.Find("Gold_AP").GetComponentsInChildren<Text>()[1];
 
         stage_attribute = GameObject.FindGameObjectWithTag("stage_attribute");
         //attributeScreen = GameObject.FindGameObjectWithTag("attribute");
