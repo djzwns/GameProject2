@@ -86,6 +86,7 @@ public class ScreenManager : MonoBehaviour {
                 stage.GameEnd();
                 break;
         }
+        player.UnitReset();
     }
 
     // 돈, 아케이드 포인트 업데이트
