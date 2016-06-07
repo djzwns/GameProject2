@@ -6,6 +6,7 @@ public class ScreenManager : MonoBehaviour {
     private Text gold;
     private Text arcade;
 
+    // 스크린 관련 오브젝트 및 스크립트들
     private GameObject stage_attribute;
     private AttributeScreen attributeScreen;
     private StageSelectScreen stageSelectScreen;
@@ -13,13 +14,17 @@ public class ScreenManager : MonoBehaviour {
     private GameObject tapToStart;
     private GameObject newLoadScreen;
 
+    // 스테이지 매니저
     protected StageManager stage;
 
-    // NONE 강화소-스테이지, ATTRIBUTE 강화소, STAGESELECT 스테이지 선택
+    // NONE tap to start, ATTRIBUTE 강화소, STAGESELECT 스테이지 선택
     protected enum E_SCREEN { NONE, NEWLOAD, SELECT, ATTRIBUTE, STAGESELECT, STAGE }
 
     // 현재 어느 스크린을 띄우고 있는지,
     protected E_SCREEN currentScreen = E_SCREEN.NONE;
+
+    // 뒤로가기 연속으로 못누르게 시간사용
+    private float dTime = 0f;
 
     protected Player player;
 
@@ -67,13 +72,20 @@ public class ScreenManager : MonoBehaviour {
 
     void Update()
     {
-        // 터치시 실행
+        if (currentScreen == E_SCREEN.STAGE && stage.GameClear() || player.IsDead())
+        {
+            resultScreen.ScreenEnable();
+        }
+
+        //// 터치시 실행
         //if (currentScreen == E_SCREEN.NONE && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         //{
         //    currentScreen = E_SCREEN.NEWLOAD;
         //    tapToStart.SetActive(false);
         //    newLoadScreen.SetActive(true);
         //}
+
+        // 컴터용
         if (currentScreen == E_SCREEN.NONE && Input.GetMouseButtonDown(0))
         {
             currentScreen = E_SCREEN.NEWLOAD;
@@ -81,16 +93,13 @@ public class ScreenManager : MonoBehaviour {
             newLoadScreen.SetActive(true);
         }
 
-        // 뒤로가기 버튼
-        if (Input.GetKey(KeyCode.Escape))
+        // 뒤로가기 버튼 한번에 여러번 실행 안되도록 시간 넣어줌
+        if (dTime > 1f && Input.GetKey(KeyCode.Escape))
         {
             ReturnScreen();
+            dTime = 0;
         }
-
-        if (currentScreen == E_SCREEN.STAGE && stage.GameClear() || player.IsDead())
-        {
-            resultScreen.ScreenEnable();
-        }
+        dTime += Time.deltaTime;
     }
 
     // 강화소나 스테이지 버튼 눌렀을 때 실행
