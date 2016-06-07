@@ -13,7 +13,10 @@ public class EnemyController : UnitController {
     {
         attackTime += Time.deltaTime;
         if (enemy.IsDead())
+        {
             gameObject.SetActive(false);
+            player.EnemyCounting();
+        }
     }
 
     void OnCollisionStay2D(Collision2D coll)

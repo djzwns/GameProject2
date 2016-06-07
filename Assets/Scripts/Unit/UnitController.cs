@@ -4,7 +4,7 @@ using System.Collections;
 public class UnitController : MonoBehaviour {
     // player 의 정보를 받음
     [SerializeField]
-    protected UnitEntity player;
+    protected Player player;
 
     // 몬스터 정보를 받음
     [SerializeField]

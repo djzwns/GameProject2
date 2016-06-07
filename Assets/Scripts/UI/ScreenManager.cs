@@ -9,6 +9,7 @@ public class ScreenManager : MonoBehaviour {
     private GameObject stage_attribute;
     public AttributeScreen attributeScreen;
     public StageSelectScreen stageSelectScreen;
+    public ResultScreen resultScreen;
 
     protected StageManager stage;
 
@@ -31,10 +32,24 @@ public class ScreenManager : MonoBehaviour {
         stage_attribute = GameObject.FindGameObjectWithTag("stage_attribute");
         //attributeScreen = GameObject.FindGameObjectWithTag("attribute");
         //stageSelectScreen = GameObject.FindGameObjectWithTag("stage_select");
+
+
+        // 도대체 뭐가 문젠지 ㅡㅡ 짜증나게 하네
+        // 나중에라도 원인 알아낸다 진짜
         //attributeScreen.ScreenDisable();
         //stageSelectScreen.ScreenDisable();
+        resultScreen.ScreenDisable();
+        ////////////////////////////////////////
 
         PlayerMoneyUpdate();
+    }
+
+    void Update()
+    {
+        if (currentScreen == E_SCREEN.STAGE && stage.GameClear() || player.IsDead())
+        {
+            resultScreen.ScreenEnable();
+        }
     }
 
     // 강화소나 스테이지 버튼 눌렀을 때 실행

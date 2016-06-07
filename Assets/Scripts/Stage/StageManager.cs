@@ -55,6 +55,14 @@ public class StageManager : MonoBehaviour
         player.SetActive(false);
     }
 
+    public bool GameClear()
+    {
+        if (Player.Instance.DeadEnemyCount == enemyManager.EnemeyCount)
+        {
+            return true;
+        }
+        return false;
+    }
 
     // 스테이지 선택 시 호출
     public void GameStart()
@@ -77,6 +85,7 @@ public class StageManager : MonoBehaviour
     {
         player.transform.position = initPlayerPos;
         player.GetComponent<PlayerController>().PlayerReset();
+        Player.Instance.CountReset();
         player.SetActive(false);
     }
 }

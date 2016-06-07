@@ -12,6 +12,11 @@ public class Player : UnitEntity {
     private int arcadePoint = 100;
     public int ArcadePoint { get{ return arcadePoint; } }
 
+    private int deadEnemyCount = 0;
+    public int DeadEnemyCount { get{ return deadEnemyCount; } }
+    public void EnemyCounting() { ++deadEnemyCount; }
+    public void CountReset() { deadEnemyCount = 0; }
+
     // 인스턴스 받아옴
     public static Player Instance
     {

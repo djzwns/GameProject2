@@ -18,6 +18,7 @@ public class EnemySpawn : MonoBehaviour {
 
     // 소환 될 몬스터 수 
     private int enemyCount;
+    public int EnemeyCount { get{ return enemyCount; } }
     private int basicEnemy = 0;
     private int attackEnemy = 0;
     private int defenceEnemy = 0;
