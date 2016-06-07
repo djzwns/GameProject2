@@ -38,6 +38,7 @@ public class StageSelectScreen : ScreenManager {
     {
         stage = StageManager.Instance;
         bigStageNum = stage.currentStage / 10;
+        BigButtonDisable();
         BigStageEnable(stage.AchieveStage);
         SmallStageEnable(bigStageNum, stage.AchieveStage);
     }
@@ -54,6 +55,7 @@ public class StageSelectScreen : ScreenManager {
         for (int i = 0; i <= buttonCount; ++i)
         {
             BigStageButton[i].interactable = true;
+            BigStageButton[i].gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/UI/" + (i+1).ToString());
         }
     }
 
@@ -63,9 +65,12 @@ public class StageSelectScreen : ScreenManager {
         // 달성 스테이지의 앞 자리보다 작으면
         if (_bigStage < _achieveStage / 10)
         {// 버튼 전부 활성화
+            int i = 0;
             foreach (var button in SmallStageButton)
             {
                 button.interactable = true;
+                button.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/UI/" + (i + 1).ToString());
+                ++i;
             }
         }
         else
@@ -73,6 +78,7 @@ public class StageSelectScreen : ScreenManager {
             for (int i = 0; i <= _achieveStage % 10; ++i)
             {
                 SmallStageButton[i].interactable = true;
+                SmallStageButton[i].gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/UI/" + (i+1).ToString());
             }
         }
     }
@@ -80,13 +86,19 @@ public class StageSelectScreen : ScreenManager {
     void BigButtonDisable()
     {
         foreach (var button in BigStageButton)
+        {
             button.interactable = false;
+            button.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/UI/lock");
+        }
     }
 
     void SmallButtonDisable()
     {
         foreach (var button in SmallStageButton)
+        {
             button.interactable = false;
+            button.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Textures/UI/lock");
+        }
     }
 
     // 외부에서 스크린 켜고 끄고..
