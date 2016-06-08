@@ -108,6 +108,7 @@ public class ScreenManager : MonoBehaviour {
         if (_screen.Equals("SELECT"))
         {
             currentScreen = E_SCREEN.SELECT;
+            attributeScreen.LoadAttribute();
             // 이쪽으로 옮기니 정상 작동하는 ..
             // 도저히 이해 할 수 없다 ㅡㅡ
             attributeScreen.ScreenDisable();
