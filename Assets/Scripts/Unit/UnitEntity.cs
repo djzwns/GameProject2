@@ -50,6 +50,18 @@ public class UnitEntity : ScriptableObject {
         currentHealthPoint = healthPoint;
     }
 
+    // 초기화
+    public virtual void UnitInitialize()
+    {
+        defence = 0;            // 방어력
+        strength = 50f;       // 공격력
+        power = 20;           // 힘
+        healthPoint = 500f;  // 최대 체력
+        speed = 2f;           // 이동속도
+        currentHealthPoint = healthPoint;// 현재 체력
+        evasion = 0;     // 회피율
+    }
+
     // 죽었는지 체크함, 죽으면 true 반환
     public bool IsDead()
     {

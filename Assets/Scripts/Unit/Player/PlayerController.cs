@@ -55,4 +55,24 @@ public class PlayerController : UnitController
     {
         player.UnitReset();
     }
+
+    // 새로하기 
+    public void NewGame()
+    {
+        player.UnitInitialize();
+        player.SaveData();
+        player.LoadData();
+    }
+
+    // 저장하기
+    public void SaveGame()
+    {
+        player.SaveData();
+    }
+
+    // 불러오기
+    public void LoadGame()
+    {
+        player.LoadData();
+    }
 }

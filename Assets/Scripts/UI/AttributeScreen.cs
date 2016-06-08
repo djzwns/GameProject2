@@ -92,15 +92,98 @@ public class AttributeScreen : ScreenManager {
         price[7].text = ap_evasionPrice.ToString();
     }
 
+    // 초기화
+    void AttributeReset()
+    {
+        // 골드 능력치 구매 가격
+        gold_healthPrice = 500;
+        gold_strengthPrice = 500;
+        gold_powerPrice = 500;
 
-    // 세이브 로드
-    void SaveAttribute()
-    {
-        //PlayerPrefs.SetInt("UsedGold", usedGold);
-        //PlayerPrefs.SetInt("UsedAP", usedAP);
+        // 골드 구매로 그 동안 얼만큼 증가시켰는지 누적 증가량
+        gold_totalGainHealth = 0;
+        gold_totalGainStrength = 0;
+        gold_totalGainPower = 0;
+
+        // 아케이드 포인트 구매 가격
+        ap_healthPrice = 1;
+        ap_strengthPrice = 1;
+        ap_defencePrice = 1;
+        ap_accuracyPrice = 1;
+        ap_evasionPrice = 1;
+
+        // 골드 구매로 그 동안 얼만큼 증가시켰는지 누적 증가량
+        ap_totalGainHealth = 0;
+        ap_totalGainStrength = 0;
+        ap_totalGainDefence = 0;
+        ap_totalGainAccuracy = 0;
+        ap_totalGainEvasion = 0;
+
+        usedGold = 0;
+        usedAP = 0;
     }
-    void LoadAttribute()
+
+    // 세이브
+    public void SaveAttribute()
     {
+        PlayerPrefs.SetInt("GoldHealthPrice", gold_healthPrice);
+        PlayerPrefs.SetInt("GoldStrengthPrice", gold_strengthPrice);
+        PlayerPrefs.SetInt("GoldPowerPrice", gold_powerPrice);
+
+        PlayerPrefs.SetInt("GoldTotalHealth", gold_totalGainHealth);
+        PlayerPrefs.SetInt("GoldTotalStrength", gold_totalGainStrength);
+        PlayerPrefs.SetInt("GoldTotalPower", gold_totalGainPower);
+
+        PlayerPrefs.SetInt("APHealthPrice", ap_healthPrice);
+        PlayerPrefs.SetInt("APStrengthPrice", ap_strengthPrice);
+        PlayerPrefs.SetInt("APDefencePrice", ap_defencePrice);
+        PlayerPrefs.SetInt("APAccuracyPrice", ap_accuracyPrice);
+        PlayerPrefs.SetInt("APEvasionPrice", ap_evasionPrice);
+
+        PlayerPrefs.SetInt("APTotalHealth", ap_totalGainHealth);
+        PlayerPrefs.SetInt("APTotalStrength", ap_totalGainStrength);
+        PlayerPrefs.SetInt("APTotalDefence", ap_totalGainDefence);
+        PlayerPrefs.SetInt("APTotalAccuracy", ap_totalGainAccuracy);
+        PlayerPrefs.SetInt("APTotalEvasion", ap_totalGainEvasion);
+
+        PlayerPrefs.SetInt("UsedGold", usedGold);
+        PlayerPrefs.SetInt("UsedAP", usedAP);
+    }
+
+    // 로드
+    public void LoadAttribute()
+    {
+        gold_healthPrice = PlayerPrefs.GetInt("GoldHealthPrice", gold_healthPrice);
+        gold_strengthPrice = PlayerPrefs.GetInt("GoldStrengthPrice", gold_strengthPrice);
+        gold_powerPrice = PlayerPrefs.GetInt("GoldPowerPrice", gold_powerPrice);
+
+        gold_totalGainHealth = PlayerPrefs.GetInt("GoldTotalHealth", gold_totalGainHealth);
+        gold_totalGainStrength = PlayerPrefs.GetInt("GoldTotalStrength", gold_totalGainStrength);
+        gold_totalGainPower = PlayerPrefs.GetInt("GoldTotalPower", gold_totalGainPower);
+
+        ap_healthPrice = PlayerPrefs.GetInt("APHealthPrice", ap_healthPrice);
+        ap_strengthPrice = PlayerPrefs.GetInt("APStrengthPrice", ap_strengthPrice);
+        ap_defencePrice = PlayerPrefs.GetInt("APDefencePrice", ap_defencePrice);
+        ap_accuracyPrice = PlayerPrefs.GetInt("APAccuracyPrice", ap_accuracyPrice);
+        ap_evasionPrice = PlayerPrefs.GetInt("APEvasionPrice", ap_evasionPrice);
+
+        ap_totalGainHealth = PlayerPrefs.GetInt("APTotalHealth", ap_totalGainHealth);
+        ap_totalGainStrength = PlayerPrefs.GetInt("APTotalStrength", ap_totalGainStrength);
+        ap_totalGainDefence = PlayerPrefs.GetInt("APTotalDefence", ap_totalGainDefence);
+        ap_totalGainAccuracy = PlayerPrefs.GetInt("APTotalAccuracy", ap_totalGainAccuracy);
+        ap_totalGainEvasion = PlayerPrefs.GetInt("APTotalEvasion", ap_totalGainEvasion);
+
+        usedGold = PlayerPrefs.GetInt("UsedGold", usedGold);
+        usedAP = PlayerPrefs.GetInt("UsedAP", usedAP);
+    }
+
+    // 속성 초기화
+    public void AttributeInitialize()
+    {
+        AttributeReset();
+        SaveAttribute();
+        LoadAttribute();
+        PlayerMoneyUpdate();
     }
 
     /// ====== 버튼 입력시 사용할 함수 =================================================

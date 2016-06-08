@@ -102,6 +102,15 @@ public class Player : UnitEntity {
         }
     }
 
+    // 초기화
+    public override void UnitInitialize()
+    {
+        base.UnitInitialize();
+        accuracy = 80;    // 명중률
+        gold = 1000;
+        arcadePoint = 100;
+    }
+
     // 프로퍼티 get -------------------------------------------
     //public int Evasion { get { return evasion; } }
 }
