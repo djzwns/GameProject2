@@ -2,10 +2,16 @@
   <goblin>
     <enemy Strength="10" Defence="0" Power="16" HP="60" Speed="2" Evasion="0" />
   </goblin>
-  <alligator>
+  <mimic>
+    <enemy Strength="10" Defence="0" Power="16" HP="60" Speed="2" Evasion="0" />
+  </mimic>
+  <scorpion>
     <enemy Strength="20" Defence="0" Power="19" HP="140" Speed="2" Evasion="0" />
-  </alligator>
+  </scorpion>
   <snowman>
     <enemy Strength="30" Defence="0" Power="19" HP="200" Speed="2" Evasion="0" />
   </snowman>
+  <alligator>
+    <enemy Strength="20" Defence="0" Power="19" HP="140" Speed="2" Evasion="0" />
+  </alligator>
 </EnemyList>
