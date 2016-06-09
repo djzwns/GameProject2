@@ -20,39 +20,43 @@ public class StageInfo
     public int basicEnemyCount      = 1;    // 일반 몬스터
     public int strongEnemyCount    = 0;    // 방어 몬스터
     public int insaneEnemyCount     = 0;    // 공격 몬스터
+    public int bossEnemyCount = 0;          // 보스 몹
+
+    public int reward_gold;     // 클리어 골드 보상
+    public int reward_ap;       // 클리어 ap 보상
 }
 
 public class StageXml
 {
-    // 스테이지 정보를 저장하는 함수인데 
-    // 실 게임에서는 필요가 없어지므로 사용하지 않을 것임
-    public static void StageSave(StageInfo _info, string _filePath)
-    {
-        XmlDocument StageDocument = new XmlDocument();
-        StageDocument.Load(_filePath);
+    //// 스테이지 정보를 저장하는 함수인데 
+    //// 실 게임에서는 필요가 없어지므로 사용하지 않을 것임
+    //public static void StageSave(StageInfo _info, string _filePath)
+    //{
+    //    XmlDocument StageDocument = new XmlDocument();
+    //    StageDocument.Load(_filePath);
 
-        XmlElement StageElement;
+    //    XmlElement StageElement;
 
-        // 파일이 없으면 새로 생성
-        if (StageDocument["StageList"] == null)
-            StageElement = StageDocument.CreateElement("StageList");
-        // 있으면 불러오기
-        else
-            StageElement = StageDocument["StageList"];
+    //    // 파일이 없으면 새로 생성
+    //    if (StageDocument["StageList"] == null)
+    //        StageElement = StageDocument.CreateElement("StageList");
+    //    // 있으면 불러오기
+    //    else
+    //        StageElement = StageDocument["StageList"];
 
-        StageDocument.AppendChild(StageElement);
+    //    StageDocument.AppendChild(StageElement);
 
-        XmlElement element = StageDocument.CreateElement("Stage");
-        element.SetAttribute("StageNumber", _info.stageNumber.ToString());
-        element.SetAttribute("BGCount", _info.bgCount.ToString());
-        element.SetAttribute("GameMode", System.Convert.ToInt32(_info.gameMode).ToString());
-        element.SetAttribute("BasicEnemy", _info.basicEnemyCount.ToString());
-        element.SetAttribute("StrongEnemy", _info.strongEnemyCount.ToString());
-        element.SetAttribute("InsaneEnemy", _info.insaneEnemyCount.ToString());
-        StageElement.AppendChild(element);
+    //    XmlElement element = StageDocument.CreateElement("Stage");
+    //    element.SetAttribute("StageNumber", _info.stageNumber.ToString());
+    //    element.SetAttribute("BGCount", _info.bgCount.ToString());
+    //    element.SetAttribute("GameMode", System.Convert.ToInt32(_info.gameMode).ToString());
+    //    element.SetAttribute("BasicEnemy", _info.basicEnemyCount.ToString());
+    //    element.SetAttribute("StrongEnemy", _info.strongEnemyCount.ToString());
+    //    element.SetAttribute("InsaneEnemy", _info.insaneEnemyCount.ToString());
+    //    StageElement.AppendChild(element);
 
-        StageDocument.Save(_filePath);
-    }
+    //    StageDocument.Save(_filePath);
+    //}
 
     // filePath 의 xml 파일을 불러와 값을 입력 시킨다.
     public static List<StageInfo> StageLoad(string _filePath)
@@ -96,6 +100,9 @@ public class StageXml
             info.basicEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("BasicEnemy"));
             info.strongEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("StrongEnemy"));
             info.insaneEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("InsaneEnemy"));
+            info.bossEnemyCount = System.Convert.ToInt32(StageElement.GetAttribute("BossEnemy"));
+            info.reward_gold = System.Convert.ToInt32(StageElement.GetAttribute("Reward_Gold"));
+            info.reward_ap = System.Convert.ToInt32(StageElement.GetAttribute("Reward_AP"));
 
             // 리스트에 하나씩 추가
             StageList.Add(info);

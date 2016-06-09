@@ -32,6 +32,7 @@ public class ScreenManager : MonoBehaviour {
     {
         currentScreen = E_SCREEN.NONE;
         stage = StageManager.Instance;
+        stage.LoadStage();
         player = Player.Instance;
 
         gold = GameObject.Find("Gold_AP").GetComponentsInChildren<Text>()[0];

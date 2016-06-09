@@ -88,4 +88,31 @@ public class StageManager : MonoBehaviour
         Player.Instance.CountReset();
         player.SetActive(false);
     }
+
+    // 스테이지 갱신
+    public bool NextStage()
+    {
+        if (achieveStage == currentStage)
+        {
+            ++achieveStage;
+            PlayerPrefs.SetInt("AchieveStage", achieveStage);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    // 스테이지 불러오기
+    public void LoadStage()
+    {
+        achieveStage = PlayerPrefs.GetInt("AchieveStage", achieveStage);
+    }
+
+    // 스테이지 초기화 
+    public void StageInitialize()
+    {
+        achieveStage = 0;
+        PlayerPrefs.SetInt("AchieveStage", achieveStage);
+    }
 }

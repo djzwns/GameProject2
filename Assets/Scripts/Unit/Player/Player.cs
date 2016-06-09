@@ -69,6 +69,19 @@ public class Player : UnitEntity {
         }
     }
 
+    // 보상 받기
+    public void RewardMoney(string _moneyType, int _money)
+    {
+        if (_moneyType.Equals("AP"))
+        {
+            arcadePoint += _money;
+        }
+        else
+        {
+            gold += _money;
+        }
+    }
+
     // 함수 재정의 -----------------------------------------------------
     // 데이터 저장
     public override void SaveData()
