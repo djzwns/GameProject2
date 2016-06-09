@@ -7,9 +7,10 @@ public class CharacterMovement : MonoBehaviour {
     
     // 수평 키 입력 시 사용
     private float moving = 0f;
+    private int istouch = 1;
 
     // 캐릭터 이동 속도
-    public float speed = 4.0f;
+    private float speed = 3.0f;
 
     // 캐릭터 점프력
     private float jumpPower;
@@ -31,35 +32,42 @@ public class CharacterMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        //else if (GameMode.gamemode == GAMEMODE.Gamemode.STORY)
+        //{
+        if (EndFalling())
+            rigid2D.velocity = new Vector2(speed * istouch, rigid2D.velocity.y);// (Vector2.right * speed * 0.1f) + rigid2D.velocity;
+        //}
         if (GAMEMODE.Instance.gamemode == GAMEMODE.Gamemode.ARCADE)
         {
             Move();
-            Jump();
-            rigid2D.velocity = new Vector2(moving * speed, rigid2D.velocity.y);
+            //Jump();
+            //rigid2D.velocity = new Vector2(moving * speed, rigid2D.velocity.y);
 
-            // axis 가 0 이 아닐 때 즉, 움직이고 있을 때 방향 따라 스프라이트를 플립 해줌.
-            // axis < 0 의 결과에 따라 true, false 를 반환 하게 됨.
-            if (moving != 0)
-                spriteRenderer.flipX = moving < 0;
+            // 터치 상태면 왼쪽을 바라봄
+            spriteRenderer.flipX = istouch < 0;
         }
-        else if (GameMode.gamemode == GAMEMODE.Gamemode.STORY)
-        {
-            if (EndFalling())
-                rigid2D.velocity = new Vector2( speed, rigid2D.velocity.y);// (Vector2.right * speed * 0.1f) + rigid2D.velocity;
-        }
-	}
+    }
 
     // 터치하고 드래그 하면 움직임
     public void Move()
     {
-        moving = Input.GetAxis("Horizontal");
-        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        //{
-        //    moving = Input.GetTouch(0).deltaPosition.x;
-        //}
+        //moving = Input.GetAxis("Horizontal");
+
+        // 누르고 있으면 왼쪽으로 아니면 오른쪽으로 이동
+
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(0).phase == TouchPhase.Stationary)
+        //    istouch = -1;
+        ////if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         //else
-        //    moving = 0f;
+        //    istouch = 1;
+
+
+        if (Input.GetMouseButton(0))
+            istouch = -1;
+        else
+            istouch = 1;
     }
 
     // 두번 터치 했을 때 점프를 하게됨
