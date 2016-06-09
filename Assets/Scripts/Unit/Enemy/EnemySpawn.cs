@@ -22,6 +22,7 @@ public class EnemySpawn : MonoBehaviour {
     private int basicEnemy = 0;
     private int attackEnemy = 0;
     private int defenceEnemy = 0;
+    private int bossEnemy = 0;
 
     // 소환 몬스터 생성 순서
     private EnemyType[] arrApear;
@@ -67,16 +68,20 @@ public class EnemySpawn : MonoBehaviour {
         while (currentEnemy < enemyCount)
         {
             yield return new WaitForSeconds(spawnTime);
+            EnemyType type = EnemyType.BASIC;
+
+            // 보스 맵이면 보스를 불러오도록..
+            if (stage.stageNumber % 10 == 9) type = EnemyType.BOSS;
             int stageNum = (int)(stage.stageNumber * 0.1f);
 
             GameObject temp = Instantiate(pfEnemy[stageNum], spawn.transform.position, Quaternion.identity) as GameObject;
             Enemy tempEnemy = (Enemy)temp.GetComponent<EnemyController>().Enemy;
-            SetEnemyName(tempEnemy, stageNum);
+            SetEnemyName(tempEnemy, stageNum, type);
             tempEnemy.LoadData();
 
             SpriteRenderer tempSprite = temp.GetComponent<SpriteRenderer>();
 
-            EnemyType type = arrApear[currentEnemy];
+            type = arrApear[currentEnemy];
             if (EnemyType.BASIC == type)
             {
                 temp.transform.localScale = new Vector2(0.8f, 0.8f);
@@ -94,6 +99,13 @@ public class EnemySpawn : MonoBehaviour {
                 tempEnemy.type = EnemyType.INSANE;
                 tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName + "2");
             }
+            else if (EnemyType.BOSS == type)
+            {
+                temp.transform.localScale = new Vector2(1.2f, 1.2f);
+                tempEnemy.type = EnemyType.BOSS;
+                tempSprite.sprite = Resources.Load<Sprite>("Textures/" + temp.GetComponent<EnemyController>().Enemy.unitName);
+            }
+
             // 타입별 능력치 세팅
             tempEnemy.AttributeSet(tempEnemy.type);
             // 생성된 오브젝트를 spawn 하위 오브젝트로 넣어줌
@@ -124,6 +136,11 @@ public class EnemySpawn : MonoBehaviour {
                 arrApear[currentEnemy] = EnemyType.INSANE;
                 ++defenceEnemy;
             }
+            else if (bossEnemy < stage.bossEnemyCount)
+            {
+                arrApear[currentEnemy] = EnemyType.BOSS;
+                ++bossEnemy;
+            }
             ++currentEnemy;
         }
         currentEnemy = 0;
@@ -144,8 +161,15 @@ public class EnemySpawn : MonoBehaviour {
     }
 
     /// 몬스터 이름 설정
-    void SetEnemyName(Enemy _enemy, int _stage)
+    void SetEnemyName(Enemy _enemy, int _stage, EnemyType _type)
     {
+        // 보스 일 때
+        if (_type == EnemyType.BOSS)
+        {
+            _enemy.unitName = "boss" + (_stage + 1).ToString();
+            return;
+        }
+
         switch (_stage)
         {
             case 0:
@@ -175,7 +199,7 @@ public class EnemySpawn : MonoBehaviour {
     ///
     void InitEnemy()
     {
-        enemyCount = stage.strongEnemyCount + stage.basicEnemyCount + stage.insaneEnemyCount;
+        enemyCount = stage.strongEnemyCount + stage.basicEnemyCount + stage.insaneEnemyCount + stage.bossEnemyCount;
         arrApear = new EnemyType[enemyCount];
         CreateEnemyList();
         EnemyListSuffle();
