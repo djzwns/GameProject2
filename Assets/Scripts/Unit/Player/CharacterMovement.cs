@@ -23,7 +23,6 @@ public class CharacterMovement : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         speed = Player.Instance.speed;
         jumpPower = Player.Instance.JumpPower;
-        GameMode = GAMEMODE.Instance;
 	}
 	
 	// Update is called once per frame
