@@ -93,4 +93,9 @@ public class CharacterMovement : MonoBehaviour {
         }
         return false;
     }
+
+    void OnDisable()
+    {
+        istouch = 1;
+    }
 }

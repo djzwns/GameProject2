@@ -21,6 +21,7 @@ public class ResultScreen : ScreenManager {
         if (player.IsDead())
         {
             resultText.color = red;
+            rewardText.text = "";
             resultText.text = "MISSON FAILED";
         }
         // 이겼을 때 CLEAR
