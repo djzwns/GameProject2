@@ -105,14 +105,15 @@ public class Player : UnitEntity {
         //jumpPower = jumpPower + (speed * 0.01f);
     }
 
-    public override void Attack(UnitEntity unit)
+    public override float Attack(UnitEntity unit)
     {
         // 명중률에 따라 몬스터를 때리거나 못 때리거나
         if (accuracy >= Random.Range(1, 100))
         {
             //Debug.Log("명중");
-            base.Attack(unit);
+            return base.Attack(unit);
         }
+        return 0;
     }
 
     // 초기화

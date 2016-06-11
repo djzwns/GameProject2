@@ -7,7 +7,8 @@ public class PlayerController : UnitController
 	// Use this for initialization
 	void Awake () {
         player = Player.Instance;
-	}
+        damageDisplay = DamageDisplay.Instance;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,8 +29,11 @@ public class PlayerController : UnitController
         else
         {
             enemy = null;
+            return;
         }
 
+        Vector3 headPos;
+        headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position + new Vector3(1, 0);
         if (enemy != null)
         {
 
@@ -38,7 +42,7 @@ public class PlayerController : UnitController
             if (attackTime >= player.AttackSpeed)
             {
                 attackTime = 0;
-                player.Attack(enemy);
+                damageDisplay.CreateDamageText(player.Attack(enemy), headPos);
 
                 // 힘이 적보다 더 세면 밀처냄
                 if (player.power > enemy.power)

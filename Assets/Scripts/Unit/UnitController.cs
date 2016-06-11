@@ -9,7 +9,12 @@ public class UnitController : MonoBehaviour {
     // 몬스터 정보를 받음
     [SerializeField]
     protected UnitEntity enemy;
-    
+
+    protected DamageDisplay damageDisplay;
+
+    void Awake()
+    {
+    }
 
     // 공격 가능한 시간
     protected float attackTime = 0f;

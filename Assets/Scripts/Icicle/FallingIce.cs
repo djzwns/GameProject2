@@ -12,6 +12,8 @@ public class FallingIce : MonoBehaviour {
 
     protected bool isFalling = false;
 
+    private DamageDisplay damageDisplay;
+
     void OnEnable()
     {
         spawnTime = 9f / (stage.currentStage % 10) + Random.Range(0f, 3f);
@@ -49,7 +51,9 @@ public class FallingIce : MonoBehaviour {
         iceRigid2D.gravityScale = 0;
 
         stage = StageManager.Instance;
-	}
+        damageDisplay = DamageDisplay.Instance;
+
+    }
 
     // 얼음 떨어짐
     void FallingIcicle()
@@ -76,6 +80,9 @@ public class FallingIce : MonoBehaviour {
         // 부딪힌 오브젝트가 플레이어일 경우 데미지
         if (coll.gameObject.tag == "Player")
         {
+            Vector3 headPos;
+            headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position + new Vector3(1f, 0.5f);
+            damageDisplay.CreateDamageText(Player.Instance.CurrentHealthPoint, headPos);
             coll.gameObject.GetComponent<PlayerController>().SuddenlyDeath();
         }
 

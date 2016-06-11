@@ -22,26 +22,31 @@ public class UnitEntity : ScriptableObject {
     }
 
     // 데미지를 0부터 최대 값까지.
-    public virtual void TakeDamage(float amount)
+    public virtual bool TakeDamage(float amount)
     {
         // 회피율에 따라 데미지를 주거나 못주거나.
         if (evasion >= Random.Range(1, 100))
         {
             //Debug.Log("회피");
             //base.TakeDamage(0);
+            return false;
         }
         else // 방어력에 의해 데미지를 감소시켜 깎음. 방어력 1당 1% 데미지 감소
             currentHealthPoint -= Mathf.Clamp(amount - ( amount * defence * 0.01f ), 0, int.MaxValue );
+        return true;
         //Debug.Log("현재 체력 : " + currentHelthPoint);
     }
 
     // unit을 공격 한다.
-    public virtual void Attack(UnitEntity unit)
+    public virtual float Attack(UnitEntity unit)
     {
         // 데미지를 80~120% 랜덤하게 줌
         float damage = strength * Random.Range(0.8f, 1.2f);
 
-        unit.TakeDamage(damage);
+        if (!unit.TakeDamage(damage))
+            return -1;
+
+        return damage;
     }
 
     // 리셋

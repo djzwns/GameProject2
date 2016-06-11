@@ -21,9 +21,9 @@ public class Enemy : UnitEntity
         currentHealthPoint = healthPoint;
     }
 
-    public override void Attack(UnitEntity unit)
+    public override float Attack(UnitEntity unit)
     {
-        base.Attack(unit);
+        return base.Attack(unit);
     }
 
     public void AttributeSet(EnemySpawn.EnemyType _type)
