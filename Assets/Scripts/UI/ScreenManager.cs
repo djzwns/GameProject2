@@ -13,6 +13,7 @@ public class ScreenManager : MonoBehaviour {
     private ResultScreen resultScreen;
     private GameObject tapToStart;
     private GameObject newLoadScreen;
+    protected GameObject icicles;
 
     // 스테이지 매니저
     protected StageManager stage;
@@ -39,12 +40,14 @@ public class ScreenManager : MonoBehaviour {
         arcade = GameObject.Find("Gold_AP").GetComponentsInChildren<Text>()[1];
 
         //stage_attribute = GameObject.FindGameObjectWithTag("stage_attribute");
+        icicles = GameObject.Find("Icicles");
         stage_attribute = GameObject.Find("Stage_Attribute");
         tapToStart = GameObject.Find("TapToStart");
         newLoadScreen = GameObject.Find("New_Load");
         attributeScreen = GameObject.Find("AttributeScreen").GetComponent<AttributeScreen>();
         stageSelectScreen = GameObject.Find("StageScreen").GetComponent<StageSelectScreen>();
         resultScreen = GameObject.Find("GameResultScreen").GetComponent<ResultScreen>();
+
 
 
         // 도대체 뭐가 문젠지 ㅡㅡ 짜증나게 하네
@@ -63,6 +66,7 @@ public class ScreenManager : MonoBehaviour {
 
     void Start()
     {
+        icicles.SetActive(false);
         // 여기로 옮기고도 문제가 생기네 아 이해 할 수가 없다 ㅂㄷㅂㄷ
         //attributeScreen.ScreenDisable();
         //stageSelectScreen.ScreenDisable();
@@ -78,22 +82,26 @@ public class ScreenManager : MonoBehaviour {
             resultScreen.ScreenEnable();
         }
 
-        //// 터치시 실행
-        //if (currentScreen == E_SCREEN.NONE && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        //{
-        //    currentScreen = E_SCREEN.NEWLOAD;
-        //    tapToStart.SetActive(false);
-        //    newLoadScreen.SetActive(true);
-        //}
-
-        // 컴터용
-        if (currentScreen == E_SCREEN.NONE && Input.GetMouseButtonDown(0))
+        if (Application.platform == RuntimePlatform.Android)
         {
-            currentScreen = E_SCREEN.NEWLOAD;
-            tapToStart.SetActive(false);
-            newLoadScreen.SetActive(true);
+            // 터치시 실행
+            if (currentScreen == E_SCREEN.NONE && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                currentScreen = E_SCREEN.NEWLOAD;
+                tapToStart.SetActive(false);
+                newLoadScreen.SetActive(true);
+            }
         }
-
+        else
+        {
+            // 컴터용
+            if (currentScreen == E_SCREEN.NONE && Input.GetMouseButtonDown(0))
+            {
+                currentScreen = E_SCREEN.NEWLOAD;
+                tapToStart.SetActive(false);
+                newLoadScreen.SetActive(true);
+            }
+        }
         // 뒤로가기 버튼 한번에 여러번 실행 안되도록 시간 넣어줌
         if (dTime > 1f && Input.GetKey(KeyCode.Escape))
         {
@@ -183,6 +191,8 @@ public class ScreenManager : MonoBehaviour {
                 stageSelectScreen.ScreenEnable();
                 //stage_attribute.SetActive(true);
                 PrintGoldAP(true);
+                if (icicles.activeSelf)
+                    icicles.SetActive(false);
                 stage.GameEnd();
                 break;
         }

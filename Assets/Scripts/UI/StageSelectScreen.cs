@@ -31,6 +31,9 @@ public class StageSelectScreen : ScreenManager {
         stage.currentStage = bigStageNum + _stage;
         stage.GameStart();
         GameObject.Find("Main Camera").GetComponent<CameraFollow>().CamReset();
+
+        if (stage.stage[stage.currentStage].gameMode == GAMEMODE.Gamemode.ARCADE)
+            icicles.SetActive(true);
     }
 
     // 활성화 되면..

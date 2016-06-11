@@ -49,6 +49,11 @@ public class PlayerController : UnitController
         }
     }
 
+    // 돌연사
+    public void SuddenlyDeath()
+    {
+        player.TakeDamage(player.CurrentHealthPoint);
+    }
 
     // 게임이 실행 중이면 오브젝트 활성화
     public void PlayerReset()
