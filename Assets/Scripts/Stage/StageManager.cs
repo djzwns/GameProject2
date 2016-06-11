@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -26,6 +27,10 @@ public class StageManager : MonoBehaviour
 
     // 스테이지 생성 매니저
     private StageCreate StageCreator;
+
+    // 아케이드 버텨야하는 시간
+    private float arcadeTime = 30f;
+    public float ArcadeTime { get{ return arcadeTime; }set{ arcadeTime = value; } }
 
     // 매니저 인스턴스
     private static StageManager instance;
@@ -57,7 +62,11 @@ public class StageManager : MonoBehaviour
 
     public bool GameClear()
     {
-        if (Player.Instance.DeadEnemyCount == enemyManager.EnemeyCount)
+        if (Stage[currentStage].gameMode == GAMEMODE.Gamemode.STORY && Player.Instance.DeadEnemyCount == enemyManager.EnemeyCount)
+        {
+            return true;
+        }
+        else if(Stage[currentStage].gameMode == GAMEMODE.Gamemode.ARCADE && arcadeTime <= 0)
         {
             return true;
         }
@@ -114,5 +123,10 @@ public class StageManager : MonoBehaviour
     {
         achieveStage = 0;
         PlayerPrefs.SetInt("AchieveStage", achieveStage);
+    }
+
+    public void TimerReset(float _time)
+    {
+        arcadeTime = _time;
     }
 }

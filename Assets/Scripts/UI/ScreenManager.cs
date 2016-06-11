@@ -13,6 +13,9 @@ public class ScreenManager : MonoBehaviour {
     private ResultScreen resultScreen;
     private GameObject tapToStart;
     private GameObject newLoadScreen;
+    private GameObject timer;
+    private Text timerText;
+
     protected GameObject icicles;
 
     // 스테이지 매니저
@@ -47,7 +50,8 @@ public class ScreenManager : MonoBehaviour {
         attributeScreen = GameObject.Find("AttributeScreen").GetComponent<AttributeScreen>();
         stageSelectScreen = GameObject.Find("StageScreen").GetComponent<StageSelectScreen>();
         resultScreen = GameObject.Find("GameResultScreen").GetComponent<ResultScreen>();
-
+        timer = GameObject.Find("Timer");
+        timerText = timer.GetComponentInChildren<Text>();
 
 
         // 도대체 뭐가 문젠지 ㅡㅡ 짜증나게 하네
@@ -67,6 +71,7 @@ public class ScreenManager : MonoBehaviour {
     void Start()
     {
         icicles.SetActive(false);
+        timer.SetActive(false);
         // 여기로 옮기고도 문제가 생기네 아 이해 할 수가 없다 ㅂㄷㅂㄷ
         //attributeScreen.ScreenDisable();
         //stageSelectScreen.ScreenDisable();
@@ -109,6 +114,8 @@ public class ScreenManager : MonoBehaviour {
             dTime = 0;
         }
         dTime += Time.deltaTime;
+
+        UpdateTimer();
     }
 
     // 강화소나 스테이지 버튼 눌렀을 때 실행
@@ -212,5 +219,32 @@ public class ScreenManager : MonoBehaviour {
     {
         gold.transform.parent.gameObject.SetActive(_switch);
         arcade.transform.parent.gameObject.SetActive(_switch);
+    }
+
+
+    // 타이머 업뎃
+    void UpdateTimer()
+    {
+        if (stage.stage[stage.currentStage].gameMode == GAMEMODE.Gamemode.ARCADE 
+            && currentScreen == E_SCREEN.STAGE
+            && stage.ArcadeTime > 0 
+            && !player.IsDead())
+        {
+            timerText.text = stage.ArcadeTime.ToString("000");
+
+            stage.ArcadeTime -= Time.deltaTime;
+        }
+        else
+        {
+            timer.SetActive(false);
+        }
+    }
+
+    // 시간 초기화
+    protected void TimerReset(float _time)
+    {
+        stage.TimerReset(_time);
+        timer.SetActive(true);
+        timerText.text = "";
     }
 }

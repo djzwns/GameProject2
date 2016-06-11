@@ -4,14 +4,14 @@
   <Stage StageNumber="2" BGCount="2" GameMode="1" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="0" Reward_AP ="1" />
   <Stage StageNumber="3" BGCount="3" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="400" Reward_AP ="0" />
   <Stage StageNumber="4" BGCount="3" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="500" Reward_AP ="0" />
-  <Stage StageNumber="5" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="600" Reward_AP ="0" />
+  <Stage StageNumber="5" BGCount="2" GameMode="1" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="0" Reward_AP ="1" />
   <Stage StageNumber="6" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="700" Reward_AP ="0" />
   <Stage StageNumber="7" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="800" Reward_AP ="0" />
-  <Stage StageNumber="8" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="900" Reward_AP ="0" />
+  <Stage StageNumber="8" BGCount="2" GameMode="1" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="0" Reward_AP ="2" />
   <Stage StageNumber="9" BGCount="3" GameMode="0" BasicEnemy="0" StrongEnemy="0" InsaneEnemy="0" BossEnemy ="1" Reward_Gold ="1000" Reward_AP ="0" />
   <Stage StageNumber="10" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="1100" Reward_AP ="0" />
   <Stage StageNumber="11" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="1200" Reward_AP ="0" />
-  <Stage StageNumber="12" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="1300" Reward_AP ="0" />
+  <Stage StageNumber="12" BGCount="2" GameMode="1" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="0" Reward_AP ="1" />
   <Stage StageNumber="13" BGCount="2" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="1400" Reward_AP ="0" />
   <Stage StageNumber="14" BGCount="3" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="1500" Reward_AP ="0" />
   <Stage StageNumber="15" BGCount="3" GameMode="0" BasicEnemy="3" StrongEnemy="1" InsaneEnemy="0" BossEnemy ="0" Reward_Gold ="1600" Reward_AP ="0" />
