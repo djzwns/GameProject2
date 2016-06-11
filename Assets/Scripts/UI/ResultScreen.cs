@@ -43,16 +43,16 @@ public class ResultScreen : ScreenManager {
     // 이미지 점점 보이게 fixedUpdate 주기마다 알파 값 증가 시켜줌.
     IEnumerator FadeIn()
     {
-        for (float i = 0; i < 256; i += 0.02f)
+        for (float i = 0; i < 1f; i += 0.01f)
         {
             Color ImageColor = new Color(resultImage.color.r, resultImage.color.g, resultImage.color.b, i);
             //Color textColor = new Color(resultText.color.r, resultText.color.g, resultText.color.b, i);
             resultImage.color = ImageColor;
             //resultText.color = textColor;
-            if(!resultButton.gameObject.activeSelf)
-                resultButton.gameObject.SetActive(true);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.001f);
         }
+        if (!resultButton.gameObject.activeSelf)
+            resultButton.gameObject.SetActive(true);
     }
 
     public void ScreenEnable()
