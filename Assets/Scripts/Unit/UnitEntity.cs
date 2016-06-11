@@ -14,7 +14,7 @@ public class UnitEntity : ScriptableObject {
     public float CurrentHealthPoint { get { return currentHealthPoint; } }
     protected float jumpPower = 3f;    // 점프력
     protected float attackSpeed = 1f;
-    public int evasion = 0;     // 회피율
+    public int evasion = 20;     // 회피율
 
     void Awake()
     {

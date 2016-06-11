@@ -81,9 +81,12 @@ public class FallingIce : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             Vector3 headPos;
-            headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position + new Vector3(1f, 0.5f);
-            damageDisplay.CreateDamageText(Player.Instance.CurrentHealthPoint, headPos);
-            coll.gameObject.GetComponent<PlayerController>().SuddenlyDeath();
+            headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position;// + new Vector3(1f, 0.5f);
+
+            // 고드름은 회피 불가이므로 회피될 경우 맞을때 까지
+            while (!coll.gameObject.GetComponent<PlayerController>().SuddenlyDeath()) { }
+            damageDisplay.CreateDamageText(Player.Instance.healthPoint, headPos);
+                
         }
 
         IcicleReset();

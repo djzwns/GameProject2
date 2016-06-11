@@ -33,7 +33,7 @@ public class PlayerController : UnitController
         }
 
         Vector3 headPos;
-        headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position + new Vector3(1, 0);
+        headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position;// + new Vector3(1, 0);
         if (enemy != null)
         {
 
@@ -54,9 +54,9 @@ public class PlayerController : UnitController
     }
 
     // 돌연사
-    public void SuddenlyDeath()
+    public bool SuddenlyDeath()
     {
-        player.TakeDamage(player.CurrentHealthPoint);
+        return player.TakeDamage(player.CurrentHealthPoint);
     }
 
     // 게임이 실행 중이면 오브젝트 활성화

@@ -25,7 +25,7 @@ public class EnemyController : UnitController {
         if (coll.gameObject.tag.Equals("Player"))
         {
             Vector3 headPos;
-            headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position + new Vector3(1f, 0.5f);
+            headPos = coll.gameObject.GetComponent<HPBar>().HeadPosition.transform.position;// + new Vector3(1f, 0.5f);
             //headPos = coll.transform.position + new Vector3(coll.gameObject.GetComponent<BoxCollider2D>().size.x*2f, coll.gameObject.GetComponent<BoxCollider2D>().size.y);
             // 다음 공격까지 약간의 텀을 만듬
             // 한번에 여러번 때리는 것 방지
