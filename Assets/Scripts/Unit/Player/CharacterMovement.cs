@@ -57,6 +57,8 @@ public class CharacterMovement : MonoBehaviour {
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
                 istouch = -1;
             //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                istouch = 1;
             else
                 istouch = 1;
         }
