@@ -1,29 +1,32 @@
 <EnemyList>
   <goblin>
-    <enemy Strength="10" Defence="0" Power="16" HP="60" Speed="10" Evasion="0" />
+    <enemy Strength="10" Defence="0" Power="16" HP="90" Speed="10" Evasion="0" />
   </goblin>
   <mimic>
-    <enemy Strength="10" Defence="0" Power="16" HP="60" Speed="2" Evasion="0" />
+    <enemy Strength="30" Defence="0" Power="20" HP="140" Speed="2" Evasion="0" />
   </mimic>
   <scorpion>
-    <enemy Strength="20" Defence="0" Power="19" HP="140" Speed="2" Evasion="0" />
+    <enemy Strength="35" Defence="0" Power="22" HP="220" Speed="2" Evasion="0" />
   </scorpion>
   <snowman>
-    <enemy Strength="30" Defence="0" Power="19" HP="200" Speed="2" Evasion="0" />
+    <enemy Strength="75" Defence="0" Power="25" HP="350" Speed="2" Evasion="0" />
   </snowman>
   <alligator>
-    <enemy Strength="20" Defence="0" Power="19" HP="140" Speed="2" Evasion="0" />
+    <enemy Strength="100" Defence="0" Power="30" HP="600" Speed="2" Evasion="0" />
   </alligator>
   <boss1>
-    <enemy Strength="20" Defence="0" Power="19" HP="1400" Speed="2" Evasion="0" />
+    <enemy Strength="30" Defence="0" Power="24" HP="4500" Speed="2" Evasion="0" />
   </boss1>
   <boss2>
-    <enemy Strength="20" Defence="0" Power="19" HP="1400" Speed="2" Evasion="0" />
+    <enemy Strength="55" Defence="0" Power="28" HP="6000" Speed="2" Evasion="0" />
   </boss2>
   <boss3>
-    <enemy Strength="20" Defence="0" Power="19" HP="1400" Speed="2" Evasion="0" />
+    <enemy Strength="100" Defence="0" Power="30" HP="8000" Speed="2" Evasion="0" />
   </boss3>
   <boss4>
-    <enemy Strength="20" Defence="0" Power="19" HP="1400" Speed="2" Evasion="0" />
+    <enemy Strength="220" Defence="0" Power="40" HP="12000" Speed="2" Evasion="0" />
   </boss4>
+  <boss5>
+    <enemy Strength="300" Defence="0" Power="50" HP="20000" Speed="2" Evasion="0" />
+  </boss5>
 </EnemyList>
