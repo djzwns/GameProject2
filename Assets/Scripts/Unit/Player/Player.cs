@@ -133,6 +133,7 @@ public class Player : UnitEntity {
     {
         base.UnitInitialize();
         accuracy = 80;    // 명중률
+        evasion = 20;
         gold = 0;
         arcadePoint = 0;
     }

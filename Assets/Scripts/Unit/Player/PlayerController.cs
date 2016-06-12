@@ -56,7 +56,7 @@ public class PlayerController : UnitController
     // 돌연사
     public bool SuddenlyDeath()
     {
-        return player.TakeDamage(player.CurrentHealthPoint);
+        return player.TakeDamage(player.CurrentHealthPoint + 1);
     }
 
     // 게임이 실행 중이면 오브젝트 활성화
