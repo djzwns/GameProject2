@@ -15,6 +15,7 @@ public class ScreenManager : MonoBehaviour {
     private GameObject newLoadScreen;
     private GameObject timer;
     private Text timerText;
+    private GameObject progressBar;
 
     protected GameObject icicles;
 
@@ -44,15 +45,18 @@ public class ScreenManager : MonoBehaviour {
 
         //stage_attribute = GameObject.FindGameObjectWithTag("stage_attribute");
         icicles = GameObject.Find("Icicles");
+
         stage_attribute = GameObject.Find("Stage_Attribute");
         tapToStart = GameObject.Find("TapToStart");
         newLoadScreen = GameObject.Find("New_Load");
         attributeScreen = GameObject.Find("AttributeScreen").GetComponent<AttributeScreen>();
         stageSelectScreen = GameObject.Find("StageScreen").GetComponent<StageSelectScreen>();
         resultScreen = GameObject.Find("GameResultScreen").GetComponent<ResultScreen>();
+
         timer = GameObject.Find("Timer");
         timerText = timer.GetComponentInChildren<Text>();
 
+        progressBar = GameObject.Find("ProgressBar");
 
         // 도대체 뭐가 문젠지 ㅡㅡ 짜증나게 하네
         // 나중에라도 원인 알아낸다 진짜
@@ -72,6 +76,7 @@ public class ScreenManager : MonoBehaviour {
     {
         icicles.SetActive(false);
         timer.SetActive(false);
+        progressBar.SetActive(false);
         // 여기로 옮기고도 문제가 생기네 아 이해 할 수가 없다 ㅂㄷㅂㄷ
         //attributeScreen.ScreenDisable();
         //stageSelectScreen.ScreenDisable();
@@ -152,6 +157,7 @@ public class ScreenManager : MonoBehaviour {
             currentScreen = E_SCREEN.STAGE;
             stageSelectScreen.ScreenDisable();
             PrintGoldAP(false);
+            progressBar.SetActive(true);
         }
         //stage_attribute.SetActive(false);
     }
@@ -198,6 +204,7 @@ public class ScreenManager : MonoBehaviour {
                 stageSelectScreen.ScreenEnable();
                 //stage_attribute.SetActive(true);
                 PrintGoldAP(true);
+                progressBar.SetActive(false);
                 if (icicles.activeSelf)
                     icicles.SetActive(false);
                 stage.GameEnd();

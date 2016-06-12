@@ -82,6 +82,18 @@ public class Player : UnitEntity {
         }
     }
 
+    public void StrengthAdvantageOrPenalty(float _strength, float _percent = 0f)
+    {
+        if (_percent == 0f)
+        {
+            strength = _strength;
+        }
+        else
+        {
+            strength *= _percent;
+        }
+    }
+
     // 함수 재정의 -----------------------------------------------------
     // 데이터 저장
     public override void SaveData()
