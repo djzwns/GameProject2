@@ -22,13 +22,13 @@ public class ResultScreen : ScreenManager {
         {
             resultText.color = red;
             rewardText.text = "";
-            resultText.text = "MISSON FAILED";
+            resultText.text = "MISSION FAILED";
         }
         // 이겼을 때 CLEAR
         else
         {
             resultText.color = green;
-            resultText.text = "MISSON CLEAR";
+            resultText.text = "MISSION CLEAR";
 
             RewardUpdate();
         }
