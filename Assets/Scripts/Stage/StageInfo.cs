@@ -64,7 +64,7 @@ public class StageXml
         XmlDocument StageDocument = new XmlDocument();
 
         // 안드로이드에서 불러오기
-        if (Application.platform == RuntimePlatform.Android)
+        //if (Application.platform == RuntimePlatform.Android)
         {
             //string strFile = "Stage.xml";
             //string strFilePath = Application.persistentDataPath + "/" + strFile;
@@ -79,11 +79,11 @@ public class StageXml
             //XmlDocument xmldoc = new XmlDocument();
             StageDocument.LoadXml(textAsset.text);
         }
-        else// if(Application.platform == RuntimePlatform.WindowsEditor)
-        {
-            // 경로에 해당하는 파일을 불러옴
-            StageDocument.Load(_filePath);
-        }
+        //else// if(Application.platform == RuntimePlatform.WindowsEditor)
+        //{
+        //    // 경로에 해당하는 파일을 불러옴
+        //    StageDocument.Load(_filePath);
+        //}
 
         // StageList 에 해당하는 모든 정보를 받아옴
         XmlElement StageListElement = StageDocument["StageList"];

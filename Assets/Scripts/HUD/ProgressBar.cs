@@ -8,7 +8,6 @@ public class ProgressBar : MonoBehaviour {
     public GameObject floor;
 
     private float floorSizeX;
-    private bool isAdvantageOrPenalty;
 
     private float playerStrength;
 
@@ -43,7 +42,7 @@ public class ProgressBar : MonoBehaviour {
         if (progressBar.value <= 0.2f)
         {
             Player.Instance.StrengthAdvantageOrPenalty(playerStrength);
-            Player.Instance.StrengthAdvantageOrPenalty(0f, 0.6f);
+            Player.Instance.StrengthAdvantageOrPenalty(0f, 0.7f);
         }
 
         else if (progressBar.value >= 0.5f)

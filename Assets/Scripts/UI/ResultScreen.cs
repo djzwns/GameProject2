@@ -90,6 +90,13 @@ public class ResultScreen : ScreenManager {
                 rewardText.color = yellow;
                 rewardText.text = "+" + money.ToString() + "G";
                 player.RewardMoney("GOLD", money);
+                money = stage.stage[stage.currentStage].reward_ap;
+                if (money != 0)
+                {
+                    rewardText.color = Color.cyan;
+                    rewardText.text += "  +" + money.ToString() + "ap";
+                    player.RewardMoney("AP", money);
+                }
             }
         }
         else

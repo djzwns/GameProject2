@@ -6,10 +6,10 @@ public class Player : UnitEntity {
     private int accuracy = 80;    // 명중률
     public int Accuracy { get{ return accuracy; } set{ accuracy = value; } }
 
-    private int gold = 1000;
+    private int gold = 0;
     public int Gold {get{ return gold; } }
 
-    private int arcadePoint = 100;
+    private int arcadePoint = 0;
     public int ArcadePoint { get{ return arcadePoint; } }
 
     private int deadEnemyCount = 0;
@@ -133,8 +133,8 @@ public class Player : UnitEntity {
     {
         base.UnitInitialize();
         accuracy = 80;    // 명중률
-        gold = 1000;
-        arcadePoint = 100;
+        gold = 0;
+        arcadePoint = 0;
     }
 
     // 프로퍼티 get -------------------------------------------
