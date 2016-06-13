@@ -15,7 +15,9 @@ public class ScreenManager : MonoBehaviour {
     private GameObject newLoadScreen;
     private GameObject timer;
     private Text timerText;
-    private GameObject progressBar;
+    protected GameObject progressBar;
+
+    private BGMManager bgm;
 
     protected GameObject icicles;
 
@@ -57,6 +59,8 @@ public class ScreenManager : MonoBehaviour {
         timerText = timer.GetComponentInChildren<Text>();
 
         progressBar = GameObject.Find("ProgressBar");
+
+        bgm = GameObject.Find("Main Camera").GetComponent<BGMManager>();
 
         // 도대체 뭐가 문젠지 ㅡㅡ 짜증나게 하네
         // 나중에라도 원인 알아낸다 진짜
@@ -145,6 +149,7 @@ public class ScreenManager : MonoBehaviour {
             currentScreen = E_SCREEN.ATTRIBUTE;
             stage_attribute.SetActive(false);
             attributeScreen.ScreenEnable();
+            ChangeBGM();
         }
         else if (_screen.Equals("STAGESELECT"))
         {
@@ -157,7 +162,7 @@ public class ScreenManager : MonoBehaviour {
             currentScreen = E_SCREEN.STAGE;
             stageSelectScreen.ScreenDisable();
             PrintGoldAP(false);
-            progressBar.SetActive(true);
+            ChangeBGM();
         }
         //stage_attribute.SetActive(false);
     }
@@ -189,6 +194,7 @@ public class ScreenManager : MonoBehaviour {
                 currentScreen = E_SCREEN.SELECT;
                 attributeScreen.ScreenDisable();
                 stage_attribute.SetActive(true);
+                ChangeBGM();
                 break;
 
             case E_SCREEN.STAGESELECT:
@@ -208,6 +214,7 @@ public class ScreenManager : MonoBehaviour {
                 if (icicles.activeSelf)
                     icicles.SetActive(false);
                 stage.GameEnd();
+                ChangeBGM();
                 break;
         }
         player.UnitReset();
@@ -253,5 +260,10 @@ public class ScreenManager : MonoBehaviour {
         stage.TimerReset(_time);
         timer.SetActive(true);
         timerText.text = "";
+    }
+
+    protected void ChangeBGM()
+    {
+        bgm.ChangeBGM((int)currentScreen, stage.currentStage);
     }
 }
