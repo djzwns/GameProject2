@@ -4,6 +4,9 @@ using System.Collections;
 
 public class ProgressBar : MonoBehaviour {
     public Slider progressBar;
+    public Text advantageText;
+    public Text penaltyText;
+
     public GameObject player;
     public GameObject floor;
 
@@ -15,12 +18,14 @@ public class ProgressBar : MonoBehaviour {
     {
         // 바닥의 길이 구해옴
         floorSizeX = floor.GetComponent<BoxCollider2D>().size.x;
-        playerStrength = Player.Instance.strength;
+        playerStrength = Player.Instance.strength;      
     }
 
     void OnDisable()
     {
         Player.Instance.StrengthAdvantageOrPenalty(playerStrength);
+        penaltyText.gameObject.SetActive(false);
+        advantageText.gameObject.SetActive(false);
     }
 
     void FixedUpdate()
@@ -43,14 +48,27 @@ public class ProgressBar : MonoBehaviour {
         {
             Player.Instance.StrengthAdvantageOrPenalty(playerStrength);
             Player.Instance.StrengthAdvantageOrPenalty(0f, 0.7f);
+
+            if (!penaltyText.IsActive())
+                penaltyText.gameObject.SetActive(true);
         }
 
         else if (progressBar.value >= 0.5f)
         {
             Player.Instance.StrengthAdvantageOrPenalty(playerStrength);
             Player.Instance.StrengthAdvantageOrPenalty(0f, 1.2f);
+
+            if (!advantageText.IsActive())
+                advantageText.gameObject.SetActive(true);
         }
         else
+        {
             Player.Instance.StrengthAdvantageOrPenalty(playerStrength);
+
+            if (penaltyText.IsActive())
+                penaltyText.gameObject.SetActive(false);
+            if (advantageText.IsActive())
+                advantageText.gameObject.SetActive(false);
+        }
     }
 }

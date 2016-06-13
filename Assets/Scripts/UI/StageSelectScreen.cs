@@ -37,6 +37,8 @@ public class StageSelectScreen : ScreenManager {
             icicles.SetActive(true);
             TimerReset((stage.currentStage % 10 + 1) / 3 * 10f + 10f);
         }
+        else
+            progressBar.SetActive(true);
     }
 
     // 활성화 되면..
