@@ -47,7 +47,7 @@ public class StageSelectScreen : ScreenManager {
         BigButtonDisable();
         SmallButtonDisable();
         BigStageEnable(stage.AchieveStage);
-        SmallStageEnable(bigStageNum, stage.AchieveStage);
+        BigStageSelect(bigStageNum);
     }
 
     void OnDisable()

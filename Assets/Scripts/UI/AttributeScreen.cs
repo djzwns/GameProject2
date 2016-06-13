@@ -63,8 +63,8 @@ public class AttributeScreen : ScreenManager {
     void PlayerAttributeUpdate()
     {
         // 체력, 공격력, 힘, 방어력, 명중률, 회피율 각각 텍스트에 입력
-        playerInfoText[0].text = player.healthPoint.ToString();
-        playerInfoText[1].text = player.strength.ToString();
+        playerInfoText[0].text = player.healthPoint.ToString("0.0");
+        playerInfoText[1].text = player.strength.ToString("0.0");
         playerInfoText[2].text = player.power.ToString();
         playerInfoText[3].text = player.defence.ToString();
         playerInfoText[4].text = player.Accuracy.ToString();
@@ -239,7 +239,14 @@ public class AttributeScreen : ScreenManager {
             usedAP += ap_healthPrice;
 
             ap_healthPrice += 1;
+
+            float percent = 1f + (ap_totalGainHealth * 0.01f);
+            player.healthPoint *= (1 / percent);   // 퍼센트 효과 받기 전의 체력으로 되돌리기
+
             ap_totalGainHealth += ap_increaseHealth;
+
+            percent = 1f + (ap_totalGainHealth * 0.01f);
+            player.healthPoint *= percent; // 증가한 퍼센트만큼 체력 올림
         }
     }
     // 공격력
@@ -250,7 +257,14 @@ public class AttributeScreen : ScreenManager {
             usedAP += ap_strengthPrice;
 
             ap_strengthPrice += 1;
+
+            float percent = 1f + (ap_totalGainStrength * 0.01f);
+            player.strength *= (1 / percent);   // 퍼센트 효과 받기 전의 체력으로 되돌리기
+
             ap_totalGainStrength += ap_increaseStrength;
+
+            percent = 1f + (ap_totalGainStrength * 0.01f);
+            player.strength *= percent; // 증가한 퍼센트만큼 체력 올림
         }
     }
     // 방어력
