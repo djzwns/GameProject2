@@ -6,10 +6,10 @@
     <enemy Strength="30" Defence="0" Power="20" HP="140" Speed="2" Evasion="0" />
   </mimic>
   <scorpion>
-    <enemy Strength="35" Defence="0" Power="22" HP="220" Speed="2" Evasion="0" />
+    <enemy Strength="75" Defence="0" Power="25" HP="350" Speed="2" Evasion="0" />
   </scorpion>
   <snowman>
-    <enemy Strength="75" Defence="0" Power="25" HP="350" Speed="2" Evasion="0" />
+    <enemy Strength="50" Defence="0" Power="22" HP="230" Speed="2" Evasion="0" />
   </snowman>
   <alligator>
     <enemy Strength="100" Defence="0" Power="30" HP="600" Speed="2" Evasion="0" />
