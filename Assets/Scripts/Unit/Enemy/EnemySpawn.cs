@@ -72,6 +72,7 @@ public class EnemySpawn : MonoBehaviour {
 
             // 보스 맵이면 보스를 불러오도록..
             if (stage.stageNumber % 10 == 9) type = EnemyType.BOSS;
+            else type = arrApear[currentEnemy];
             int stageNum = (int)(stage.stageNumber * 0.1f);
 
             GameObject temp = Instantiate(pfEnemy[stageNum], spawn.transform.position, Quaternion.identity) as GameObject;
@@ -81,7 +82,6 @@ public class EnemySpawn : MonoBehaviour {
 
             SpriteRenderer tempSprite = temp.GetComponent<SpriteRenderer>();
 
-            type = arrApear[currentEnemy];
             if (EnemyType.BASIC == type)
             {
                 temp.transform.localScale = new Vector2(0.8f, 0.8f);
