@@ -54,11 +54,9 @@ public class CharacterMovement : MonoBehaviour {
         // 누르고 있으면 왼쪽으로 아니면 오른쪽으로 이동
         if (Application.platform == RuntimePlatform.Android)
         {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved || Input.GetTouch(0).phase == TouchPhase.Stationary)
+            if (Input.touchCount > 0)
                 istouch = -1;
             //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-            else if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                istouch = 1;
             else
                 istouch = 1;
         }
